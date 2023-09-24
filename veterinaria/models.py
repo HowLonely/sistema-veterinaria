@@ -1,31 +1,26 @@
 from django.db import models
 
 # Create your models here.
-clientes = {
-    # rut, nombre, apellidos, fono_1, fono_2, email
-    0:['18789374-1', 'pedro', 'diaz rojas', '932384983', '923784732', 'pedro.dr@correo.cl'],
-    1:['17389832-2', 'juan', 'toledo gonzalez', '912893829', '912832928', 'juan.tg@correo.cl'],
-    2:['19239843-1', 'camila', 'vargas salazar', '932387645', '966476663', 'camila.vs@correo.cl'],
-}
+clientes = [
+    {'rut': '18789374-1', 'nombre': 'pedro', 'apellidos': 'diaz rojas', 'fono_1': '932384983', 'fono_2': '923784732', 'email': 'pedro.dr@correo.cl'},
+    {'rut': '17389832-2', 'nombre': 'juan', 'apellidos': 'toledo gonzalez', 'fono_1': '912893829', 'fono_2': '912832928', 'email': 'juan.tg@correo.cl'},
+    {'rut': '19239843-1', 'nombre': 'camila', 'apellidos': 'vargas salazar', 'fono_1': '932387645', 'fono_2': '966476663', 'email': 'camila.vs@correo.cl'},
+]
 
-mascotas = {
-    # sexo, edad (meses), nombre, num_chip, raza, dueño_1,
-    0:[0, 54, 'blanca', 120030, 0, 0],
-    1:[1, 24, 'negro', 100293, 1, 2],
-    2:[0, 75, 'homero', None, 2, 1],
-}
+mascotas = [
+    {'sexo': 0, 'edad_meses': 54, 'nombre': 'blanca', 'num_chip': 120030, 'raza': 0, 'dueno': 0},
+    {'sexo': 1, 'edad_meses': 24, 'nombre': 'negro', 'num_chip': 100293, 'raza': 1, 'dueno': 2},
+    {'sexo': 0, 'edad_meses': 75, 'nombre': 'homero', 'num_chip': None, 'raza': 2, 'dueno': 1},
+]
 
-razas = {
-    # nombre_raza, especie
-    0:['pastor aleman', 'perro'],
-    1:['angora', 'gato'],
-    2:['loro gris africano', 'loro']
-}
+razas = [
+    {'nombre_raza': 'pastor aleman', 'especie': 'perro'},
+    {'nombre_raza': 'angora', 'especie' : 'gato'},
+    {'nombre_raza': 'loro gris africano', 'especie': 'loro'},
+]
 
-veterinarios = {
+veterinarios = [
     # rut, credencial, nombre, apellidos, fono, email
-}
+]
 
-fichas_clinicas = {
-    
-}
+fichas_clinicas = []
