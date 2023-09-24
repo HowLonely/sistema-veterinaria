@@ -7,6 +7,7 @@ clientes = [
     {'rut': '19239843-1', 'nombre': 'camila', 'apellidos': 'vargas salazar', 'fono_1': '932387645', 'fono_2': '966476663', 'email': 'camila.vs@correo.cl'},
 ]
 
+# Foreign key son las posiciones en los arreglos
 mascotas = [
     {'sexo': 0, 'edad_meses': 54, 'nombre': 'blanca', 'num_chip': 120030, 'raza': 0, 'dueno': 0},
     {'sexo': 1, 'edad_meses': 24, 'nombre': 'negro', 'num_chip': 100293, 'raza': 1, 'dueno': 2},
@@ -18,6 +19,7 @@ razas = [
     {'nombre_raza': 'angora', 'especie' : 'gato'},
     {'nombre_raza': 'loro gris africano', 'especie': 'loro'},
 ]
+
 
 veterinarios = [
     # rut, credencial, nombre, apellidos, fono, email
