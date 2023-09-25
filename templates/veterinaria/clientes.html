@@ -11,30 +11,32 @@
     <title>Catálogo clientes</title>
   </head>
   <body data-bs-theme="dark">
-    <h1>Clientes</h1>
+    <div class="container">
+      <h1>Clientes</h1>
 
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Rut</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Apellidos</th>
-          <th scope="col">Telefonos</th>
-          <th scope="col">Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for datos in clientes %}
-        <tr>
-          <th scope="row">{{datos.rut}}</th>
-          <td>{{datos.nombre}}</td>
-          <td>{{datos.apellidos}}</td>
-          <td>{{datos.fono_1}} - {{fono_2}}</td>
-          <td>{{datos.email}}</td>
-        </tr>
-        {% endfor %}
-      </tbody>    
-    </table>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col"><h4>Rut</h4></th>
+            <th scope="col"><h4>Nombre</h4></th>
+            <th scope="col"><h4>Apellidos</h4></th>
+            <th scope="col"><h4>Telefonos</h4></th>
+            <th scope="col"><h4>Email</h4></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for datos in clientes %}
+          <tr>
+            <th scope="row">{{datos.rut}}</th>
+            <td class="text-capitalize">{{datos.nombre}}</td>
+            <td class="text-capitalize">{{datos.apellidos}}</td>
+            <td>{{datos.fono_1}}{% if datos.fono_2 %}<br>{{datos.fono_2}} {% endif %}</td>
+            <td>{{datos.email}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>    
+      </table>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
