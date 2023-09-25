@@ -26,11 +26,11 @@
         </thead>
         <tbody>
           {% for datos in clientes %}
-          <tr>
+          <tr class="align-middle">
             <th scope="row">{{datos.rut}}</th>
             <td class="text-capitalize">{{datos.nombre}}</td>
             <td class="text-capitalize">{{datos.apellidos}}</td>
-            <td>{{datos.fono_1}}{% if datos.fono_2 %}<br>{{datos.fono_2}} {% endif %}</td>
+            <td>+56 {{datos.fono_1}}{% if datos.fono_2 %}<br>+56 {{datos.fono_2}} {% endif %}</td>
             <td>{{datos.email}}</td>
           </tr>
           {% endfor %}
