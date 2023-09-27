@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <title>Catálogo atenciones</title>
+  </head>
+  <body data-bs-theme="dark">
+    <div class="container-fluid m-0 p-0">
+      <div class="row">
+        <div class="col-xl-1 col-md-2 fixed-top col-12 d-inline-block m-0 p-0">
+          <nav class="navbar navbar-expand-md bg-body-tertiary h-100">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse vh-100 sticky-md-top" id="navbarNav">
+                <ul class="nav nav-pills flex-column w-100">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'clientes' %}">Clientes</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'inicio' %}">Mascotas</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'inicio' %}">Atenciones</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'inicio' %}">Razas</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div class="ms-auto col-xl-11 col-md-10 col-12 ps-5 mt-md-0 mt-5 pt-md-0 pt-3">
+          <div class="container m-0 p-0">
+            <h1>Atenciones</h1>
+
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th scope="col"><h4>Rut</h4></th>
+                  <th scope="col"><h4>Nombre</h4></th>
+                  <th scope="col"><h4>Apellidos</h4></th>
+                  <th scope="col"><h4>Telefonos</h4></th>
+                  <th scope="col"><h4>Email</h4></th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in '0123456789'|make_list %}
+                  {% for datos in clientes %}
+                  <tr class="align-middle">
+                    <th scope="row">{{datos.rut}}</th>
+                    <td class="text-capitalize">{{datos.nombre}}</td>
+                    <td class="text-capitalize">{{datos.apellidos}}</td>
+                    <td>
+                      +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
+                      {{datos.fono_2}} {% endif %}
+                    </td>
+                    <td>{{datos.email}}</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
+                          ⋮
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                          <li><a class="dropdown-item" type="button">Editar Datos Cliente</a></li>
+                          <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#mascotas{{datos.rut}}">Ver Mascotas</a></li>
+                          <li><a class="dropdown-item" type="button">Deshabilitar Cliente</a></li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                  <div class="modal fade" id="mascotas{{datos.rut}}" tabindex="-1" aria-labelledby="ModalLabel{{datos.rut}}" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="ModalLabel{{datos.rut}}">Mascotas Cliente {{datos.rut}}</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        {% for mascota in mascotas %}
+                        {% if mascota.dueno.rut == datos.rut %}
+                        <div class="modal-body">
+                          <div class="card" style="width: 18rem;">
+                            <img src="{% static 'images/'|add:mascota.nombre|add:'.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title text-capitalize">{{mascota.nombre}}</h5>
+                              <h6 class="card-subtitle mb-2 text-body-secondary">{{mascota.edad_meses}} meses - {% if mascota.sexo %}Masculino{% else %}Femenino{% endif %}</h6>
+                              <p class="card-text text-capitalize">{{mascota.num_chip}} - {{mascota.raza.nombre_raza}} - {{mascota.raza.especie}}</p>
+                              <a href="#" class="btn btn-primary">Detalles mascota</a>
+                            </div>
+                          </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>                  
+                  {% endfor %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  </body>
+</html>

@@ -24,3 +24,9 @@ veterinarios = [
 ]
 
 fichas_clinicas = []
+
+atenciones = [
+    {'cod_atencion': 123, 'hora_inicio': '12:15', 'hora termino': '13:00', 'veterinario': 'Snoop Dogg', 'fecha_atencion': '15/09/2023','mascota_atendida': mascotas[0] , 'diagnostico': 'Enfermedad por estrés', 'tratamiento': 'Acostarse mas temprano','observaciones': None, 'fechas_control': '02/10/2023'},
+    {'cod_atencion': 123, 'hora_inicio': '12:15', 'hora termino': '13:00', 'veterinario': 'Bad Bunny', 'fecha_atencion': '10/08/2023','mascota_atendida': mascotas[1],'diagnostico': 'Pie plano', 'tratamiento': 'Reposo','observaciones': 'Evitar esfuerzo fisico', 'fechas_control': '06/09/2023'},
+    {'cod_atencion': 123, 'hora_inicio': '12:15', 'hora termino': '13:00', 'veterinario': 'Pablo Chill-E', 'fecha_atencion': '15/09/2023','mascota_atendida': mascotas[2], 'diagnostico': 'Irritación en el ojo', 'tratamiento': 'Gotas para los ojos a diario','observaciones': 'Evitar estar en ambientes áridos', 'fechas_control': '30/09/2023'},
+]
