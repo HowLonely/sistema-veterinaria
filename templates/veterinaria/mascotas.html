@@ -19,13 +19,26 @@
         <div class="col-xl-1 col-md-2 fixed-top col-12 d-inline-block m-0 p-0">
           <nav class="navbar navbar-expand-md bg-body-tertiary h-100">
             <div class="container-fluid">
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
                 <span class="navbar-toggler-icon"></span>
               </button>
-              <div class="collapse navbar-collapse vh-100 sticky-md-top" id="navbarNav">
+              <div
+                class="collapse navbar-collapse vh-100 sticky-md-top"
+                id="navbarNav"
+              >
                 <ul class="nav nav-pills flex-column w-100">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Active</a>
+                    <a class="nav-link active" aria-current="page" href="#"
+                      >Active</a
+                    >
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
@@ -41,45 +54,25 @@
         <div class="ms-auto col-xl-11 col-md-10 col-12">
           <div class="container m-0 p-0">
             <h1>Mascotas</h1>
-            <table class="table table-striped table-hover">
-              <thead>
-                <tr>
-                  <th scope="col"><h4>Dueño</h4></th>
-                  <th scope="col"><h4>Nombre</h4></th>
-                  <th scope="col"><h4>Sexo</h4></th>
-                  <th scope="col"><h4>Edad (Meses)</h4></th>
-                  <th scope="col"><h4>N° Chip</h4></th>
-                  <th scope="col"><h4>Raza</h4></th>
-                  <th scope="col"><h4>Especie</h4></th>
-                  <th scope="col"></th>
+            <div class="d-flex justify-content-around">
+              {% for mascota in mascotas %}
+              <div class="card">
+                <img  width="150" height="200" class="card-img-top object-fit-cover" src="{% static 'images/'|add:mascota.nombre|add:'.jpg' %}" alt="Card image cap" />
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="card-title text-capitalize me-2">{{mascota.nombre}}</h5>
+                    <span class="badge text-bg-secondary mb-1">N° Chip {{mascota.num_chip}}</span>
+                  </div>
 
-                </tr>
-              </thead>
-              <tbody>
-                {% for datos in mascotas %}
-                <tr class="align-middle">
-                  <th scope="row" class="text-capitalize">{{datos.dueno.nombre}}</th>
-                  <td class="text-capitalize">{{datos.nombre}}</td>
-                  <td class="text-capitalize">{{datos.sexo}}</td>
-                  <td>{{datos.edad_meses}}</td>
-                  <td>{{datos.num_chip}}</td>
-                  <td class="text-capitalize">{{datos.raza.nombre_raza}}</td>
-                  <td class="text-capitalize">{{datos.raza.especie}}</td>
-                  <td>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
-                        ⋮
-                      </button>
-                      <ul class="dropdown-menu dropdown-menu-end">
-                        <li><button class="dropdown-item" type="button">Editar Datos Mascota</button></li>
-                        <li><button class="dropdown-item" type="button">Ver dueño</button></li>
-                      </ul>
-                    </div>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+                  <span class="badge text-bg-success text-capitalize">{{mascota.raza.especie}}</span>
+                  <span class="badge text-bg-primary text-capitalize">{{mascota.raza.nombre_raza}}</span>
+                  <hr>
+
+                  <h6 class="card-subtitle mb-2 text-body-secondary">{{mascota.edad_meses}} meses - {% if mascota.sexo %}Masculino{% else %}Femenino{% endif %}</h6>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
           </div>
         </div>
       </div>
@@ -88,3 +81,46 @@
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
   </body>
 </html>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="clientes{{datos.dueno.rut}}"
+  tabindex="-1"
+  aria-labelledby="ModalLabel{{datos.rut}}"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="ModalLabel{{datos.rut}}">
+          Mascotas Cliente {{datos.rut}}
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="card" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title text-capitalize">
+              {{datos.dueno.nombre}} {{datos.dueno.apellidos}}
+            </h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+              {{datos.dueno.email}} - {% if mascota.sexo %}Masculino{% else
+              %}Femenino{% endif %}
+            </h6>
+            <p class="card-text text-capitalize">
+              {{mascota.num_chip}} - {{mascota.raza.nombre_raza}} -
+              {{mascota.raza.especie}}
+            </p>
+            <a href="#" class="btn btn-primary">Detalles mascota</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
