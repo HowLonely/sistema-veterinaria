@@ -10,6 +10,8 @@ def inicio(req):
 def clientes(req):
     data  = {
         'clientes': models.clientes,
+        'mascotas': models.mascotas,
+        'razas': models.razas,
     }
     return render(req, 'veterinaria/clientes.html', data)
 

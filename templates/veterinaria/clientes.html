@@ -69,12 +69,34 @@
                           ⋮
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                          <li><button class="dropdown-item" type="button">Editar Datos Cliente</button></li>
-                          <li><button class="dropdown-item" type="button">Ver Mascotas</button></li>
+                          <li><a class="dropdown-item" type="button">Editar Datos Cliente</a></li>
+                          <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#mascotas{{datos.rut}}">Ver Mascotas</a></li>
+                          <li><a class="dropdown-item" type="button">Deshabilitar Cliente</a></li>
                         </ul>
                       </div>
                     </td>
                   </tr>
+                  <div class="modal fade" id="mascotas{{datos.rut}}" tabindex="-1" aria-labelledby="ModalLabel{{datos.rut}}" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="ModalLabel{{datos.rut}}">Mascotas Cliente {{datos.rut}}</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="card" style="width: 18rem;">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Nombre Mascota</h5>
+                              <h6 class="card-subtitle mb-2 text-body-secondary">Edad mascota - Sexo Mascota</h6>
+                              <p class="card-text">Numero de Chip - Especie - Raza</p>
+                              <a href="#" class="btn btn-primary">Detalles mascota</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>                  
                   {% endfor %}
                 {% endfor %}
               </tbody>
