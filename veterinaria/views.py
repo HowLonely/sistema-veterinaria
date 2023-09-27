@@ -12,3 +12,11 @@ def clientes(req):
         'clientes': models.clientes,
     }
     return render(req, 'veterinaria/clientes.html', data)
+
+def mascotas(req):
+    data = {
+        'mascotas': models.mascotas,
+        'razas': models.razas,
+        'clientes': models.clientes,
+    }
+    return render(req, 'veterinaria/mascotas.html', data)
