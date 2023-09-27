@@ -20,13 +20,16 @@
               <div class="collapse navbar-collapse vh-100 sticky-md-top" id="navbarNav">
                 <ul class="nav nav-pills flex-column w-100">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Active</a>
+                    <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'clientes' %}">Clientes</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="{% url 'inicio' %}">Mascotas</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'inicio' %}">Razas</a>
                   </li>
                 </ul>
               </div>
@@ -66,9 +69,8 @@
                           ⋮
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                          <li><button class="dropdown-item" type="button">Action</button></li>
-                          <li><button class="dropdown-item" type="button">Another action</button></li>
-                          <li><button class="dropdown-item" type="button">Something else here</button></li>
+                          <li><button class="dropdown-item" type="button">Editar Datos Cliente</button></li>
+                          <li><button class="dropdown-item" type="button">Ver Mascotas</button></li>
                         </ul>
                       </div>
                     </td>
