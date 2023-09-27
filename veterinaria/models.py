@@ -16,7 +16,7 @@ razas = [
 mascotas = [
     {'sexo': 0, 'edad_meses': 54, 'nombre': 'blanca', 'num_chip': 120030, 'raza': razas[0], 'dueno': clientes[0]},
     {'sexo': 1, 'edad_meses': 24, 'nombre': 'negro', 'num_chip': 100293, 'raza': razas[1], 'dueno': clientes[2]},
-    {'sexo': 0, 'edad_meses': 75, 'nombre': 'homero', 'num_chip': None, 'raza': razas[2], 'dueno': clientes[1]},
+    {'sexo': 1, 'edad_meses': 75, 'nombre': 'homero', 'num_chip': None, 'raza': razas[2], 'dueno': clientes[1]},
 ]
 
 veterinarios = [

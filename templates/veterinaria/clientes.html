@@ -83,17 +83,21 @@
                           <h1 class="modal-title fs-5" id="ModalLabel{{datos.rut}}">Mascotas Cliente {{datos.rut}}</h1>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        {% for mascota in mascotas %}
+                        {% if mascota.dueno.rut == datos.rut %}
                         <div class="modal-body">
                           <div class="card" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
+                            <img src="{% static 'images/'|add:mascota.nombre|add:'.jpg' %}" class="card-img-top" alt="...">
                             <div class="card-body">
-                              <h5 class="card-title">Nombre Mascota</h5>
-                              <h6 class="card-subtitle mb-2 text-body-secondary">Edad mascota - Sexo Mascota</h6>
-                              <p class="card-text">Numero de Chip - Especie - Raza</p>
+                              <h5 class="card-title text-capitalize">{{mascota.nombre}}</h5>
+                              <h6 class="card-subtitle mb-2 text-body-secondary">{{mascota.edad_meses}} meses - {% if mascota.sexo %}Masculino{% else %}Femenino{% endif %}</h6>
+                              <p class="card-text text-capitalize">{{mascota.num_chip}} - {{mascota.raza.nombre_raza}} - {{mascota.raza.especie}}</p>
                               <a href="#" class="btn btn-primary">Detalles mascota</a>
                             </div>
                           </div>
                         </div>
+                        {% endif %}
+                        {% endfor %}
                       </div>
                     </div>
                   </div>                  
