@@ -3,14 +3,9 @@
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
-
     <title>Catálogo clientes</title>
   </head>
   <body data-bs-theme="dark">
@@ -25,20 +20,23 @@
               <div class="collapse navbar-collapse vh-100 sticky-md-top" id="navbarNav">
                 <ul class="nav nav-pills flex-column w-100">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Active</a>
+                    <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'clientes' %}">Clientes</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="{% url 'inicio' %}">Mascotas</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'inicio' %}">Razas</a>
                   </li>
                 </ul>
               </div>
             </div>
           </nav>
         </div>
-        <div class="ms-auto col-xl-11 col-md-10 col-12">
+        <div class="ms-auto col-xl-11 col-md-10 col-12 ps-5 mt-md-0 mt-5 pt-md-0 pt-3">
           <div class="container m-0 p-0">
             <h1>Clientes</h1>
 
@@ -50,176 +48,34 @@
                   <th scope="col"><h4>Apellidos</h4></th>
                   <th scope="col"><h4>Telefonos</h4></th>
                   <th scope="col"><h4>Email</h4></th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
-                {% for datos in clientes %}
-                <tr class="align-middle">
-                  <th scope="row">{{datos.rut}}</th>
-                  <td class="text-capitalize">{{datos.nombre}}</td>
-                  <td class="text-capitalize">{{datos.apellidos}}</td>
-                  <td>
-                    +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
-                    {{datos.fono_2}} {% endif %}
-                  </td>
-                  <td>{{datos.email}}</td>
-                </tr>
-                {% endfor %}
-                {% for datos in clientes %}
-                <tr class="align-middle">
-                  <th scope="row">{{datos.rut}}</th>
-                  <td class="text-capitalize">{{datos.nombre}}</td>
-                  <td class="text-capitalize">{{datos.apellidos}}</td>
-                  <td>
-                    +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
-                    {{datos.fono_2}} {% endif %}
-                  </td>
-                  <td>{{datos.email}}</td>
-                </tr>
-                {% endfor %}
-                {% for datos in clientes %}
-                <tr class="align-middle">
-                  <th scope="row">{{datos.rut}}</th>
-                  <td class="text-capitalize">{{datos.nombre}}</td>
-                  <td class="text-capitalize">{{datos.apellidos}}</td>
-                  <td>
-                    +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
-                    {{datos.fono_2}} {% endif %}
-                  </td>
-                  <td>{{datos.email}}</td>
-                </tr>
-                {% endfor %}
-                {% for datos in clientes %}
-                <tr class="align-middle">
-                  <th scope="row">{{datos.rut}}</th>
-                  <td class="text-capitalize">{{datos.nombre}}</td>
-                  <td class="text-capitalize">{{datos.apellidos}}</td>
-                  <td>
-                    +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
-                    {{datos.fono_2}} {% endif %}
-                  </td>
-                  <td>{{datos.email}}</td>
-                </tr>
-                {% endfor %}
-                {% for datos in clientes %}
-                <tr class="align-middle">
-                  <th scope="row">{{datos.rut}}</th>
-                  <td class="text-capitalize">{{datos.nombre}}</td>
-                  <td class="text-capitalize">{{datos.apellidos}}</td>
-                  <td>
-                    +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
-                    {{datos.fono_2}} {% endif %}
-                  </td>
-                  <td>{{datos.email}}</td>
-                </tr>
-                {% endfor %}
-                {% for datos in clientes %}
-                <tr class="align-middle">
-                  <th scope="row">{{datos.rut}}</th>
-                  <td class="text-capitalize">{{datos.nombre}}</td>
-                  <td class="text-capitalize">{{datos.apellidos}}</td>
-                  <td>
-                    +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
-                    {{datos.fono_2}} {% endif %}
-                  </td>
-                  <td>{{datos.email}}</td>
-                </tr>
-                {% endfor %}
-                {% for datos in clientes %}
-                <tr class="align-middle">
-                  <th scope="row">{{datos.rut}}</th>
-                  <td class="text-capitalize">{{datos.nombre}}</td>
-                  <td class="text-capitalize">{{datos.apellidos}}</td>
-                  <td>
-                    +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
-                    {{datos.fono_2}} {% endif %}
-                  </td>
-                  <td>{{datos.email}}</td>
-                </tr>
-                {% endfor %}
-                {% for datos in clientes %}
-                <tr class="align-middle">
-                  <th scope="row">{{datos.rut}}</th>
-                  <td class="text-capitalize">{{datos.nombre}}</td>
-                  <td class="text-capitalize">{{datos.apellidos}}</td>
-                  <td>
-                    +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
-                    {{datos.fono_2}} {% endif %}
-                  </td>
-                  <td>{{datos.email}}</td>
-                </tr>
-                {% endfor %}
-                {% for datos in clientes %}
-                <tr class="align-middle">
-                  <th scope="row">{{datos.rut}}</th>
-                  <td class="text-capitalize">{{datos.nombre}}</td>
-                  <td class="text-capitalize">{{datos.apellidos}}</td>
-                  <td>
-                    +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
-                    {{datos.fono_2}} {% endif %}
-                  </td>
-                  <td>{{datos.email}}</td>
-                </tr>
-                {% endfor %}
-                {% for datos in clientes %}
-                <tr class="align-middle">
-                  <th scope="row">{{datos.rut}}</th>
-                  <td class="text-capitalize">{{datos.nombre}}</td>
-                  <td class="text-capitalize">{{datos.apellidos}}</td>
-                  <td>
-                    +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
-                    {{datos.fono_2}} {% endif %}
-                  </td>
-                  <td>{{datos.email}}</td>
-                </tr>
-                {% endfor %}
-                {% for datos in clientes %}
-                <tr class="align-middle">
-                  <th scope="row">{{datos.rut}}</th>
-                  <td class="text-capitalize">{{datos.nombre}}</td>
-                  <td class="text-capitalize">{{datos.apellidos}}</td>
-                  <td>
-                    +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
-                    {{datos.fono_2}} {% endif %}
-                  </td>
-                  <td>{{datos.email}}</td>
-                </tr>
-                {% endfor %}
-                {% for datos in clientes %}
-                <tr class="align-middle">
-                  <th scope="row">{{datos.rut}}</th>
-                  <td class="text-capitalize">{{datos.nombre}}</td>
-                  <td class="text-capitalize">{{datos.apellidos}}</td>
-                  <td>
-                    +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
-                    {{datos.fono_2}} {% endif %}
-                  </td>
-                  <td>{{datos.email}}</td>
-                </tr>
-                {% endfor %}
-                {% for datos in clientes %}
-                <tr class="align-middle">
-                  <th scope="row">{{datos.rut}}</th>
-                  <td class="text-capitalize">{{datos.nombre}}</td>
-                  <td class="text-capitalize">{{datos.apellidos}}</td>
-                  <td>
-                    +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
-                    {{datos.fono_2}} {% endif %}
-                  </td>
-                  <td>{{datos.email}}</td>
-                </tr>
-                {% endfor %}
-                {% for datos in clientes %}
-                <tr class="align-middle">
-                  <th scope="row">{{datos.rut}}</th>
-                  <td class="text-capitalize">{{datos.nombre}}</td>
-                  <td class="text-capitalize">{{datos.apellidos}}</td>
-                  <td>
-                    +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
-                    {{datos.fono_2}} {% endif %}
-                  </td>
-                  <td>{{datos.email}}</td>
-                </tr>
+                {% for i in '0123456789'|make_list %}
+                  {% for datos in clientes %}
+                  <tr class="align-middle">
+                    <th scope="row">{{datos.rut}}</th>
+                    <td class="text-capitalize">{{datos.nombre}}</td>
+                    <td class="text-capitalize">{{datos.apellidos}}</td>
+                    <td>
+                      +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
+                      {{datos.fono_2}} {% endif %}
+                    </td>
+                    <td>{{datos.email}}</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
+                          ⋮
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                          <li><button class="dropdown-item" type="button">Editar Datos Cliente</button></li>
+                          <li><button class="dropdown-item" type="button">Ver Mascotas</button></li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
                 {% endfor %}
               </tbody>
             </table>
@@ -227,7 +83,6 @@
         </div>
       </div>
     </div>
-    <!-- Optional JavaScript -->
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
   </body>
 </html>
