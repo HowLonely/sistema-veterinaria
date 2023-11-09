@@ -66,9 +66,7 @@
           <div class="container m-0 p-0">
             <h3>Confirmar Eliminación de Cliente</h3>
             <div class="alert alert-danger h5">
-              ¿Estás seguro que deseas deshabilitar al cliente? (Rut:
-              {{cliente.rut }} Nombres: {{ cliente.nombres }} Apellidos: {{
-              cliente.apellidos }})
+              ¿Estás seguro que deseas deshabilitar al cliente? ( {{cliente.rut}} - {{ cliente.nombres }} {{cliente.apellidos }})
             </div>
             <form method="POST">
               {% csrf_token %}
