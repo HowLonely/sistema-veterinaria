@@ -39,4 +39,4 @@ def crear_cliente(req):
     else:
         form = forms.ClienteForm
     
-    return render(req, 'veterinaria/clienteAdd.html', {'form': form})
+    return render(req, 'veterinaria/clientes.html', {'form': form})

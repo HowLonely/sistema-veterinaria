@@ -45,9 +45,11 @@
             <h1>Clientes</h1>
 
             <form method="post">
+              {% csrf_token %}
               <div class="container">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="rutSpan">Rut</span>
+                  {{ form.rut }}
                   
                 </div>
                 
