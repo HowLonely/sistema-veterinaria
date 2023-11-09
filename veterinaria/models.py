@@ -72,6 +72,7 @@ class Mascotas(models.Model):
     id_raza = models.ForeignKey('Razas', models.DO_NOTHING, db_column='id_raza', blank=True, null=True)
     edad_meses = models.IntegerField(blank=True, null=True)
     sexo = models.IntegerField(blank=True, null=True)
+    url_imagen = models.CharField(max_length=100)
 
     class Meta:
         managed = False
