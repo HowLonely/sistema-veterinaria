@@ -55,7 +55,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Mantenedor clientes</h5>
                   <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, repellat aperiam!</p>
-                  <a href="#" class="btn btn-primary">Ir al mantenedor</a>
+                  <a href="{% url 'clientes' %}" class="btn btn-primary">Ir al mantenedor</a>
                 </div>
               </div>
 
@@ -64,7 +64,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Historial de atenciones</h5>
                   <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, repellat aperiam!</p>
-                  <a href="#" class="btn btn-primary">Ir a atenciones</a>
+                  <a href="{% url 'atenciones' %}" class="btn btn-primary">Ir a atenciones</a>
                 </div>
               </div>
 
@@ -79,46 +79,3 @@
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
   </body>
 </html>
-
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="clientes{{datos.dueno.rut}}"
-  tabindex="-1"
-  aria-labelledby="ModalLabel{{datos.rut}}"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="ModalLabel{{datos.rut}}">
-          Mascotas Cliente {{datos.rut}}
-        </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <div class="card" style="width: 18rem">
-          <div class="card-body">
-            <h5 class="card-title text-capitalize">
-              {{datos.dueno.nombre}} {{datos.dueno.apellidos}}
-            </h5>
-            <h6 class="card-subtitle mb-2 text-body-secondary">
-              {{datos.dueno.email}} - {% if mascota.sexo %}Masculino{% else
-              %}Femenino{% endif %}
-            </h6>
-            <p class="card-text text-capitalize">
-              {{mascota.num_chip}} - {{mascota.raza.nombre_raza}} -
-              {{mascota.raza.especie}}
-            </p>
-            <a href="#" class="btn btn-primary">Detalles mascota</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
