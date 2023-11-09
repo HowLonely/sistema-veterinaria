@@ -23,7 +23,9 @@ veterinarios = [
     # rut, credencial, nombre, apellidos, fono, email
 ]
 
-fichas_clinicas = []
+fichas_clinicas = [
+    {'mascota': mascotas[0], 'veterinario': veterinarios[0]}
+]
 
 atenciones = [
     {'cod_atencion': 123, 'hora_inicio': '12:15', 'hora_termino': '13:00', 'veterinario': 'Snoop Dogg', 'fecha_atencion': '15/09/2023','mascota_atendida': mascotas[0] , 'diagnostico': 'Enfermedad por estrés', 'tratamiento': 'Acostarse mas temprano','observaciones': None, 'fechas_control': '02/10/2023'},
