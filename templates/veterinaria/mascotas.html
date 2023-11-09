@@ -55,7 +55,7 @@
           <div class="container m-0 p-0">
             <h1>Mascotas</h1>
             <div class="d-flex justify-content-around">
-              {% for mascota in mascotas %}
+              {% for mascota in Mascotas %}
               <div class="card">
                 <img  width="150" height="200" class="card-img-top object-fit-cover" src="{% static 'images/'|add:mascota.nombre|add:'.jpg' %}" alt="Card image cap" />
                 <div class="card-body">
