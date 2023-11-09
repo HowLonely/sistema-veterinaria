@@ -16,13 +16,16 @@ class Asistentes(models.Model):
     email = models.CharField(max_length=245, blank=True, null=True)
     credenciales = models.CharField(max_length=145, blank=True, null=True)
 
+    def __str__(self):
+        return "{} {}".format(self.nombres, self.apellidos)
+
     class Meta:
         managed = False
         db_table = 'asistentes'
 
 
 class Atenciones(models.Model):
-    id_atencion = models.AutoField(primary_key=True)
+    id_atencion = models.AutoField(primary_key=True, editable=False, blank=True)
     hora_ingreso = models.TimeField(blank=True, null=True)
     hora_termino = models.TimeField(blank=True, null=True)
     id_ficha_clinica = models.ForeignKey('FichasClinicas', models.DO_NOTHING, db_column='id_ficha_clinica', blank=True, null=True)
@@ -58,6 +61,9 @@ class FichasClinicas(models.Model):
     id_veterinario = models.ForeignKey('Veterinarios', models.DO_NOTHING, db_column='id_veterinario', blank=True, null=True)
     fecha_ingreso = models.DateField(blank=True, null=True)
     creada_por_asistente = models.ForeignKey(Asistentes, models.DO_NOTHING, blank=True, null=True)
+
+    def __str__(self):
+        return "{} {}".format(self.id_mascota.nombres, self.id_mascota.num_chip)
 
     class Meta:
         managed = False
@@ -96,6 +102,9 @@ class Veterinarios(models.Model):
     credenciales = models.CharField(max_length=145, blank=True, null=True)
     fono = models.CharField(max_length=14, blank=True, null=True)
     email = models.CharField(max_length=245, blank=True, null=True)
+
+    def __str__(self):
+        return "{} {}".format(self.nombres, self.apellidos)
 
     class Meta:
         managed = False

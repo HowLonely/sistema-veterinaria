@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from veterinaria import forms
 
@@ -25,10 +25,41 @@ def mascotas(req):
     return render(req, 'veterinaria/mascotas.html', data)
 
 def atenciones(req):
-    data  = {
-        'atenciones': models.Atenciones.objects.all(),
-    }
-    return render(req, 'veterinaria/atenciones.html', data)
+    if req.method == 'POST':
+        form = forms.AtencionForm(req.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(req.path)
+    else:
+        form = forms.AtencionForm()
+    return render(req, 'veterinaria/atenciones.html', {'form': form, 'atenciones': models.Atenciones.objects.all() })
+
+def ver_atencion(req, atencion_id):
+    atencion = get_object_or_404(models.Atenciones, id_atencion=atencion_id)
+    form = forms.AtencionForm(instance=atencion)
+
+    return render(req, 'veterinaria/atencion.html', {'form': form, 'atencion': atencion})
+
+def editar_atencion(req, atencion_id):
+    atencion = get_object_or_404(models.Atenciones, id_atencion=atencion_id)
+
+    if req.method == 'POST':
+        form = forms.AtencionForm(req.POST, instance=atencion)
+        if form.is_valid():
+            form.save()
+            return redirect('/atenciones/')
+    else:
+        form = forms.AtencionForm(instance=atencion)
+    return render(req, 'veterinaria/atencion.html', {'form': form})
+
+def eliminar_atencion(req, atencion_id):
+    atencion = get_object_or_404(models.Atenciones, id_atencion=atencion_id)
+
+    if req.method == 'POST':
+        atencion.delete()
+        return redirect('/atenciones/')
+        
+    return render(req, 'veterinaria/atencionDel.html', {'atenciones': atencion})    
 
 def crear_cliente(req):
     if req.method == 'POST':
