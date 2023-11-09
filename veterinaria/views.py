@@ -24,8 +24,7 @@ def mascotas(req):
     return render(req, 'veterinaria/mascotas.html', data)
 
 def atenciones(req):
-    data  = {
-        'mascotas': models.Mascotas,
-        'atenciones': models.Atenciones,
+    data  = {,
+        'atenciones': models.Atenciones.objects.all(),
     }
     return render(req, 'veterinaria/atenciones.html', data)

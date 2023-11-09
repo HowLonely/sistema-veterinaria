@@ -57,14 +57,14 @@
               <tbody>
                   {% for atencion in atenciones %}
                   <tr class="align-middle">
-                    <th scope="row">{{atencion.cod_atencion}}</th>
+                    <th scope="row">{{atencion.id_atencion}}</th>
                     <td>{{atencion.fecha_atencion}}</td>
-                    <td class="text-capitalize">{{atencion.veterinario}}</td>
+                    <td class="text-capitalize">{{atencion.id_veterinario}}</td>
                     <td>
-                      Inicio: {{atencion.hora_inicio}}<br />
+                      Inicio: {{atencion.hora_ingreso}}<br />
                       Termino: {{atencion.hora_termino}}
                     </td>
-                    <td class="text-capitalize">{{atencion.mascota_atendida.nombre}}</td>
+                    <td class="text-capitalize">{{atencion.id_ficha_clinica.id_mascota.nombres}}</td>
                     <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
@@ -72,26 +72,27 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                           <li><a class="dropdown-item" type="button">Editar Atención</a></li>
-                          <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#atencion{{atencion.cod_atencion}}">Ver Detalles</a></li>
+                          <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#atencion{{atencion.id_atencion}}">Ver Detalles</a></li>
                           <li><a class="dropdown-item" type="button">Eliminar Atención</a></li>
                         </ul>
                       </div>
                     </td>
                   </tr>
-                  <div class="modal fade" id="atencion{{atencion.cod_atencion}}" tabindex="-1" aria-labelledby="ModalLabel{{atencion.cod_atencion}}" aria-hidden="true">
+                  <div class="modal fade" id="atencion{{atencion.id_atencion}}" tabindex="-1" aria-labelledby="ModalLabel{{atencion.id_atencion}}" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="ModalLabel{{atencion.cod_atencion}}">Atención {{atencion.cod_atencion}}</h1>
+                          <h1 class="modal-title fs-5" id="ModalLabel{{atencion.id_atencion}}">Atención {{atencion.id_atencion}}</h1>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                           <div class="card" style="width: 18rem;">
                             <img src="" class="card-img-top" alt="...">
                             <div class="card-body">
-                              <h5 class="card-title text-capitalize">ASD</h5>
-                              <h6 class="card-subtitle mb-2 text-body-secondary">asd</h6>
-                              <p class="card-text text-capitalize">asd</p>
+                              <h5 class="card-title text-capitalize">{{atencion.diagnostico}}</h5>
+                              <h6 class="card-subtitle mb-2 text-body-secondary">{{atencion.id_veterinario.nombres}} {{atencion.id_veterinario.apellidos}}</h6>
+                              <p class="card-text text-capitalize">{{atencion.tratamiento}}</p>
+                              <p class="card-text text-capitalize">{{atencion.observaciones}}</p>
                               <a href="#" class="btn btn-primary">Detalles mascota</a>
                             </div>
                           </div>
