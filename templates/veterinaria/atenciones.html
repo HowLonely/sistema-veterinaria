@@ -151,9 +151,9 @@
                           ⋮
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                          <li><a class="dropdown-item" type="button">Editar Atención</a></li>
+                          <li><a class="dropdown-item" type="button" href="{% url 'verAtencion' atencion.id_atencion %}" >Editar Atención</a></li>
                           <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#atencion{{atencion.id_atencion}}">Ver Detalles</a></li>
-                          <li><a class="dropdown-item" type="button">Eliminar Atención</a></li>
+                          <li><a class="dropdown-item" type="button" href="{% url 'atencionDel' atencion.id_atencion %}">Eliminar Atención</a></li>
                         </ul>
                       </div>
                     </td>
