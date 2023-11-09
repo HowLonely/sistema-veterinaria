@@ -55,12 +55,12 @@
           <div class="container m-0 p-0">
             <h1>Mascotas</h1>
             <div class="d-flex justify-content-around">
-              {% for mascota in Mascotas %}
+              {% for mascota in mascotas %}
               <div class="card">
-                <img  width="150" height="200" class="card-img-top object-fit-cover" src="{% static 'images/'|add:mascota.nombre|add:'.jpg' %}" alt="Card image cap" />
+                <img  width="150" height="200" class="card-img-top object-fit-cover" src="" alt="Card image cap" />
                 <div class="card-body">
                   <div class="d-flex align-items-center justify-content-between">
-                    <h5 class="card-title text-capitalize me-2">{{mascota.nombre}}</h5>
+                    <h5 class="card-title text-capitalize me-2">{{mascota.nombres}}</h5>
                     <span class="badge text-bg-secondary mb-1">N° Chip {{mascota.num_chip}}</span>
                   </div>
 

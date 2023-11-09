@@ -9,17 +9,17 @@ def inicio(req):
 
 def clientes(req):
     data  = {
-        'clientes': models.Clientes,
-        'mascotas': models.Mascotas,
-        'razas': models.Razas,
+        'clientes': models.Clientes.objects.all(),
+        'mascotas': models.Mascotas.objects.all(),
+        'razas': models.Razas.objects.all(),
     }
     return render(req, 'veterinaria/clientes.html', data)
 
 def mascotas(req):
     data = {
-        'mascotas': models.Mascotas,
-        'razas': models.Razas,
-        'clientes': models.Clientes,
+        'mascotas': models.Mascotas.objects.all(),
+        'razas': models.Razas.objects.all(),
+        'clientes': models.Clientes.objects.all(),
     }
     return render(req, 'veterinaria/mascotas.html', data)
 
