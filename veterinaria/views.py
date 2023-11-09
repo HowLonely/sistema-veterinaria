@@ -25,10 +25,14 @@ def mascotas(req):
     return render(req, 'veterinaria/mascotas.html', data)
 
 def atenciones(req):
-    data  = {
-        'atenciones': models.Atenciones.objects.all(),
-    }
-    return render(req, 'veterinaria/atenciones.html', data)
+    if req.method == 'POST':
+        form = forms.AtencionForm(req.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(req.path)
+    else:
+        form = forms.AtencionForm()
+    return render(req, 'veterinaria/atenciones.html', {'form': form, 'atenciones': models.Atenciones.objects.all() })
 
 def crear_cliente(req):
     if req.method == 'POST':

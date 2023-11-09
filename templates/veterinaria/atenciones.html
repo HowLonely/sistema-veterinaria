@@ -43,25 +43,82 @@
           <div class="container m-0 p-0">
             <h1>Atenciones</h1>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-              Launch static backdrop modal
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#form_agregar_atencion">
+              Agregar una atención
             </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog">
+            <div class="modal fade" id="form_agregar_atencion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="form_agregar_atencionLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="form_agregar_atencionLabel">Crear atención</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    ...
+                    <form method="POST">
+                      {% csrf_token %}
+                      <div class="row">
+                        <div class="mb-3 col-6">
+                          {{ form.fecha_atencion.label_tag  }}
+                          {{ form.fecha_atencion }}
+                          {{ form.fecha_atencion.errors }}
+                          <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                        </div>
+                      <div class="mb-3 col-3">
+                        {{ form.hora_ingreso.label_tag  }}
+                        {{ form.hora_ingreso }}
+                        {{ form.hora_ingreso.errors }}
+                        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                      </div>
+                      <div class="mb-3 col-3">
+                        {{ form.hora_termino.label_tag  }}
+                        {{ form.hora_termino }}
+                        {{ form.hora_termino.errors }}
+                      </div>
+                    </div>
+                      <div class="mb-3">
+                        {{ form.id_ficha_clinica.label_tag  }}
+                        {{ form.id_ficha_clinica }}
+                        {{ form.id_ficha_clinica.errors }}
+                        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                      </div>
+                      <div class="mb-3">
+                        {{ form.agendada_por_asistente.label_tag  }}
+                        {{ form.agendada_por_asistente }}
+                        {{ form.agendada_por_asistente.errors }}
+                        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                      </div>
+                      <div class="mb-3">
+                        {{ form.id_veterinario.label_tag  }}
+                        {{ form.id_veterinario }}
+                        {{ form.id_veterinario.errors }}
+                        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                      </div>
+                      <div class="mb-3">
+                        {{ form.diagnostico.label_tag  }}
+                        {{ form.diagnostico }}
+                        {{ form.diagnostico.errors }}
+                        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                      </div>
+                      <div class="mb-3">
+                        {{ form.tratamiento.label_tag  }}
+                        {{ form.tratamiento }}
+                        {{ form.tratamiento.errors }}
+                        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                      </div>
+                      <div class="mb-3">
+                        {{ form.observaciones.label_tag  }}
+                        {{ form.observaciones }}
+                        {{ form.observaciones.errors }}
+                        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                      </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Crear atención</button>
                   </div>
+                </form>
                 </div>
               </div>
             </div>
