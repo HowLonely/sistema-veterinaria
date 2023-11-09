@@ -9,12 +9,16 @@ def inicio(req):
     return render(req, 'veterinaria/index.html')
 
 def clientes(req):
-    data  = {
-        'clientes': models.Clientes.objects.all(),
-        'mascotas': models.Mascotas.objects.all(),
-        'razas': models.Razas.objects.all(),
-    }
-    return render(req, 'veterinaria/clientes.html', data)
+    if req.method == 'POST':
+        form = forms.ClienteForm(req.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(req.path)
+    else:
+        form = forms.ClienteForm
+    
+    return render(req, 'veterinaria/clientes.html', {'form': form, 'clientes': models.Clientes.objects.all(), 'mascotas': models.Mascotas.objects.all(), 'razas': models.Razas.objects.all()})
+    
 
 def mascotas(req):
     data = {
@@ -61,13 +65,3 @@ def eliminar_atencion(req, atencion_id):
         
     return render(req, 'veterinaria/atencionDel.html', {'atenciones': atencion})    
 
-def crear_cliente(req):
-    if req.method == 'POST':
-        form = forms.ClienteForm(req.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('veterinaria/clientes.html')
-    else:
-        form = forms.ClienteForm
-    
-    return render(req, 'veterinaria/clientes.html', {'form': form})

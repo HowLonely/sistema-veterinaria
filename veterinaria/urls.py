@@ -10,5 +10,5 @@ urlpatterns = [
     path('atencion/<int:atencion_id>/', views.ver_atencion, name='verAtencion'),
     path('atencionEdit/<int:atencion_id>/', views.editar_atencion, name='atencionEdit'),
     path('atencionDel/<int:atencion_id>/', views.eliminar_atencion, name='atencionDel'),
-    path('clienteAdd/', views.crear_cliente, name='crearCliente'),
+    # path('clienteAdd/', views.crear_cliente, name='crearCliente'),
 ]

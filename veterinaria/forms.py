@@ -3,6 +3,12 @@ from veterinaria.models import Clientes, Asistentes, FichasClinicas, Veterinario
 
 class ClienteForm(forms.ModelForm):
     rut = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '12345678-9'}))
+    nombres = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Juan Ignacio'}))
+    apellidos = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Gonzalez Perez'}))
+    fono_1 = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '9 12345678'}))
+    fono_2 = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '9 12345678'}))
+    email = forms.CharField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'correo@dom.cl'}))
+
 
     class Meta:
         model = Clientes
