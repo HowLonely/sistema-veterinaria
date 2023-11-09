@@ -18,7 +18,33 @@ def clientes(req):
         form = forms.ClienteForm
     
     return render(req, 'veterinaria/clientes.html', {'form': form, 'clientes': models.Clientes.objects.all(), 'mascotas': models.Mascotas.objects.all(), 'razas': models.Razas.objects.all()})
-    
+
+def ver_cliente(req, cliente_id):
+    cliente = get_object_or_404(models.Clientes, id_cliente=cliente_id)
+    form = forms.ClienteForm(instance=cliente)
+
+    return render(req, 'veterinaria/cliente.html', {'form': form, 'cliente': cliente})
+
+def editar_cliente(req, cliente_id):
+    cliente = get_object_or_404(models.Clientes, id_cliente=cliente_id)
+
+    if req.method == 'POST':
+        form = forms.ClienteForm(req.POST, instance=cliente)
+        if form.is_valid():
+            form.save()
+            return redirect('/clientes/')
+        else:
+            form = forms.ClienteForm(instance=cliente)
+        return render(req, 'veterinaria/cliente.html', {'form': form})
+
+def eliminar_cliente(req, cliente_id):
+    cliente = get_object_or_404(models.Clientes, id_cliente=cliente_id)
+
+    if req.method == 'POST':
+        cliente.delete()
+        return redirect('/clientes/')
+        
+    return render(req, 'veterinaria/clienteDel.html', {'cliente': cliente}) 
 
 def mascotas(req):
     data = {

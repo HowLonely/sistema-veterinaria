@@ -131,48 +131,52 @@
                 </tr>
               </thead>
               <tbody>
-                  {% for datos in clientes %}
+                  {% for cliente in clientes %}
                   <tr class="align-middle">
-                    <th scope="row">{{datos.rut}}</th>
-                    <td class="text-capitalize">{{datos.nombres}}</td>
-                    <td class="text-capitalize">{{datos.apellidos}}</td>
+                    <th scope="row">{{cliente.rut}}</th>
+                    <td class="text-capitalize">{{cliente.nombres}}</td>
+                    <td class="text-capitalize">{{cliente.apellidos}}</td>
                     <td>
-                      +56 {{datos.fono_1}}{% if datos.fono_2 %}<br />+56
-                      {{datos.fono_2}} {% endif %}
+                      +56 {{cliente.fono_1}}{% if cliente.fono_2 %}<br />+56
+                      {{cliente.fono_2}} {% endif %}
                     </td>
-                    <td>{{datos.email}}</td>
+                    <td>{{cliente.email}}</td>
                     <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
                           ⋮
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                          <li><a class="dropdown-item" type="button">Editar Datos Cliente</a></li>
-                          <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#mascotas{{datos.rut}}">Ver Mascotas</a></li>
-                          <li><a class="dropdown-item" type="button">Deshabilitar Cliente</a></li>
+                          <li><a class="dropdown-item" type="button" href="{% url 'verCliente' cliente.id_cliente %}" >Editar Datos Cliente</a></li>
+                          <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#mascotas{{cliente.rut}}">Ver Mascotas</a></li>
+                          <li><a class="dropdown-item" type="button" href="{% url 'clienteDel' cliente.id_cliente %}">Deshabilitar Cliente</a></li>
                         </ul>
                       </div>
                     </td>
                   </tr>
-                  <div class="modal fade" id="mascotas{{datos.rut}}" tabindex="-1" aria-labelledby="ModalLabel{{datos.rut}}" aria-hidden="true">
+                  <div class="modal fade" id="mascotas{{cliente.rut}}" tabindex="-1" aria-labelledby="ModalLabel{{cliente.rut}}" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="ModalLabel{{datos.rut}}">Mascotas Cliente {{datos.rut}}</h1>
+                          <h1 class="modal-title fs-5" id="ModalLabel{{cliente.rut}}">Mascotas Cliente {{cliente.rut}}</h1>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         {% for mascota in mascotas %}
-                        {% if mascota.dueno.rut == datos.rut %}
+                        {% if mascota.id_dueno.rut == cliente.rut %}
                         <div class="modal-body">
                           <div class="card" style="width: 18rem;">
-                            <img src="{% static 'images/'|add:mascota.nombre|add:'.jpg' %}" class="card-img-top" alt="...">
+                            <img src="" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title text-capitalize">{{mascota.nombre}}</h5>
-                              <h6 class="card-subtitle mb-2 text-body-secondary">{{mascota.edad_meses}} meses - {% if mascota.sexo %}Masculino{% else %}Femenino{% endif %}</h6>
-                              <p class="card-text text-capitalize">{{mascota.num_chip}} - {{mascota.raza.nombre_raza}} - {{mascota.raza.especie}}</p>
+                              <h6 class="card-subtitle mb-2 text-body-secondary">{{mascota.edad_meses}} meses - {% if mascota.sexo %}Macho{% else %}Hembra{% endif %}</h6>
+                              <p class="card-text text-capitalize">{{mascota.num_chip}} - {{mascota.id_raza.nombre_raza}} - {{mascota.id_raza.nombre_especie}}</p>
                               <a href="#" class="btn btn-primary">Detalles mascota</a>
                             </div>
                           </div>
+                        </div>
+                        {% else %}
+                        <div class="modal-body">
+                          <p>El cliente no tiene mascotas registradas.</p>
                         </div>
                         {% endif %}
                         {% endfor %}
