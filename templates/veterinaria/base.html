@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <title>{% block titulo %}Clínica veterinaria{% endblock %}</title>
+  </head>
+  <body data-bs-theme="dark">
+    <div class="container-fluid m-0 p-0">
+      <div class="row">
+        <div class="col-xl-1 col-md-2 fixed-top col-12 d-inline-block m-0 p-0">
+          <nav class="navbar navbar-expand-md bg-body-tertiary h-100">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse vh-100 sticky-md-top" id="navbarNav">
+                <ul class="nav nav-pills flex-column w-100">
+                  <li class="nav-item">
+                    <a class="nav-link {% block inicio %}{% endblock %}" href="{% url 'inicio' %}">Inicio</a>
+                  </li>
+                  <!-- active" aria-current="page -->
+                  <li class="nav-item">
+                    <a class="nav-link {% block clientes %}{% endblock %}" href="{% url 'clientes' %}">Clientes</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link {% block mascotas %}{% endblock %}" href="{% url 'mascotas' %}">Mascotas</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link {% block atenciones %}{% endblock %}" href="{% url 'atenciones' %}">Atenciones</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link {% block razas %}{% endblock %}" href="{% url 'inicio' %}">Razas</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+    {% block contenido %}{% endblock %}
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>
