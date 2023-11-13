@@ -1,41 +1,25 @@
-# sistema-veterinaria
+# Sistema Veterinaria
 
-1. ¿Las atenciones tienen una duración establecida?
-  >
-2. ¿Qué debería incluir una ficha veterinaria completa para su clinica?
-  >
-3. ¿Qué datos considera esenciales del veterinario en la ficha clinica? (Ej: Imagen de la mascota)
-  >
-4. En la receta, ¿qué datos considera esenciales para registrar de la mascota?, en su formato
-  >
-5. ¿Cómo desea administrar el historial de atenciones en su clinica?
-  >
-6. ¿El sistema debería incluir un login para el cliente?, es decir, distintos perfiles
-  >
-7. ¿Qué tipo de animales acepta la veterinaria?
-  >
-8. ¿Se pueden modificar los datos de la mascota?
-  >
-9. ¿Qué pasa si en la ficha clínica hay un error de digitación o similar por parte de quien 
-la ingresa, se puede modificar? o se deberá generar una nueva ficha?
-  >
-10. ¿Qué datos son modificables en las atenciones realizadas?
-  >
-11. ¿Qué datos son modificables de los dueños de las mascotas?
-  >
-12. ¿Cuántos dueños puede tener una mascota?
-  >
-13. ¿Es modificable la ficha clínica?, qué datos lo son.
-  >
-14. ¿Desea que el sistema sea centralizado o descentralizado? una clinica o varias.
-  >
-15. ¿Qué credenciales deberían ser necesarias para validar al profesional?
-  >
-16. ¿Que ocurre si una mascota registrada llega con un dueño distinto al registrado?
-  >
-17. ¿La receta deberá incluir observaciones?
-  >
-18. ¿La receta será entregada impresa, vía correo electrónico o wsp (Todas)?
- > sdfsdf
-19. ¿Qué datos son necesarios registrar del veterinario en los datos de atención?
-> 
+## Sprint 1 (Módulo Ficha Clínica):
+
+- [ ] Como Asistente, necesito registrar los datos de una mascota en una ficha clínica junto a su dueño para mantener un registro ordenado y tener acceso posteriormente a la información relacionada.
+
+Tiempo(Esfuerzo): 4+2+1 = 7 Horas
+
+- [ ] Como Asistente, necesito mantener registros de los dueños junto a sus mascotas para facilitar el acceso a la información al realizar operaciones específicas.
+
+Tiempo(Esfuerzo): 8+3.5+1.5 = 13 Horas
+
+- [ ] Como Veterinario, necesito tener acceso a los datos detallados de una mascota para tener más contexto al realizar el diagnóstico.
+
+Tiempo(Esfuerzo): 3+2+2+4 = 11 Horas
+
+- [ ] Como Asistente, necesito hacer CRUD a los datos de los dueños de una o más mascotas para mantener actualizado el sistema con respecto a los dueños de las mascotas.
+
+Tiempo(Esfuerzo): 2.6+4+3+1 = 10.6 Horas
+
+- [ ] Como Asistente, necesito hacer CRUD a todas las razas disponibles en el sistema para poder asociarlas a la mascota.
+
+Tiempo(Esfuerzo): 3+2+5+1+1 = 12 Horas
+
+#### Total: 53.6 Horas
