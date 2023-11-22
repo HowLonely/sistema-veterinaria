@@ -1,90 +1,45 @@
-<!DOCTYPE html>
+{% extends "veterinaria/base.html" %}
 {% load static %}
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+{% block titulo %}Catálogo atenciones{% endblock %}
 
-    <title>Clínica veterinaria</title>
-  </head>
-  <body data-bs-theme="dark">
-    <div class="container-fluid m-0 p-0">
-      <div class="row">
-        <div class="col-xl-1 col-md-2 fixed-top col-12 d-inline-block m-0 p-0">
-          <nav class="navbar navbar-expand-md bg-body-tertiary h-100">
-            <div class="container-fluid">
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse vh-100 sticky-md-top" id="navbarNav">
-                <ul class="nav nav-pills flex-column w-100">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'clientes' %}">Clientes</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'mascotas' %}">Mascotas</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'atenciones' %}">Atenciones</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'inicio' %}">Razas</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-        </div>
+{% block inicio %}active" aria-current="page{% endblock %}
 
-        <div class="ms-auto col-xl-11 col-md-10 col-12">
-          <div class="container m-4 p-0">
-            <h1>Clínica veterinaria</h1>
-            <div class="container d-flex justify-content-around m-5">
+{% block contenido %}
+<div class="ms-auto col-xl-11 col-md-10 col-12">
+  <div class="container m-4 p-0">
+    <h1>Clínica veterinaria</h1>
+    <div class="container d-flex justify-content-around m-5">
 
-              <div class="card" style="width: 18rem;">
-                <img src="../../static/images/mantenedor-cliente.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Mantenedor clientes</h5>
-                  <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, repellat aperiam!</p>
-                  <a href="{% url 'clientes' %}" class="btn btn-primary">Ir al mantenedor</a>
-                </div>
-              </div>
-
-              <div class="card" style="width: 18rem;">
-                <img src="../../static/images/mantenedor-atenciones.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Historial de atenciones</h5>
-                  <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, repellat aperiam!</p>
-                  <a href="{% url 'atenciones' %}" class="btn btn-primary">Ir a atenciones</a>
-                </div>
-              </div>
-
-              <div class="card" style="width: 18rem;">
-                <img src="../../static/images/mantenedor-mascotas.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Mantenedor de mascotas</h5>
-                  <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, repellat aperiam!</p>
-                  <a href="{% url 'mascotas' %}" class="btn btn-primary">Ir al mantenedor</a>
-                </div>
-              </div>
-
-
-              
-            </div>
-          </div>
+      <div class="card" style="width: 18rem;">
+        <img src="../../static/images/mantenedor-cliente.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Mantenedor clientes</h5>
+          <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, repellat aperiam!</p>
+          <a href="{% url 'clientes' %}" class="btn btn-primary">Ir al mantenedor</a>
         </div>
       </div>
+
+      <div class="card" style="width: 18rem;">
+        <img src="../../static/images/mantenedor-atenciones.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Historial de atenciones</h5>
+          <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, repellat aperiam!</p>
+          <a href="{% url 'atenciones' %}" class="btn btn-primary">Ir a atenciones</a>
+        </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+        <img src="../../static/images/mantenedor-mascotas.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Fichas clinicas</h5>
+          <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, repellat aperiam!</p>
+          <a href="{% url 'fichas' %}" class="btn btn-primary">Ir al mantenedor</a>
+        </div>
+      </div> 
     </div>
-    <!-- Optional JavaScript -->
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-  </body>
-</html>
+  </div>
+</div>
+{% endblock %}
+
+

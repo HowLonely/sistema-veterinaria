@@ -46,13 +46,13 @@ def eliminar_cliente(req, cliente_id):
         
     return render(req, 'veterinaria/clienteDel.html', {'cliente': cliente}) 
 
-def mascotas(req):
+def fichas(req):
     data = {
         'mascotas': models.Mascotas.objects.all(),
         'razas': models.Razas.objects.all(),
         'clientes': models.Clientes.objects.all(),
     }
-    return render(req, 'veterinaria/mascotas.html', data)
+    return render(req, 'veterinaria/fichas.html', data)
 
 def atenciones(req):
     if req.method == 'POST':

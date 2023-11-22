@@ -1,205 +1,167 @@
-<!DOCTYPE html>
+{% extends "veterinaria/base.html" %}
 {% load static %}
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
-    <title>Catálogo clientes</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
-    <script>
-    $(document).ready( function () {
-      $('#clientesTable').DataTable();
-  } );</script>
-  </head>
-  <body data-bs-theme="dark">
-    <div class="container-fluid m-0 p-0">
-      <div class="row">
-        <div class="col-xl-1 col-md-2 fixed-top col-12 d-inline-block m-0 p-0">
-          <nav class="navbar navbar-expand-md bg-body-tertiary h-100">
-            <div class="container-fluid">
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse vh-100 sticky-md-top" id="navbarNav">
-                <ul class="nav nav-pills flex-column w-100">
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'clientes' %}">Clientes</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'mascotas' %}">Mascotas</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'atenciones' %}">Atenciones</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'inicio' %}">Razas</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-        </div>
-        
-        <div class="ms-auto col-xl-11 col-md-10 col-12 ps-5 mt-md-0 mt-5 pt-md-0 pt-3">
-          <div class="container m-2 p-0">
-            <h1>Clientes</h1>
-            <br>
-            <div class="mb-3">
-              <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#form_agregar_cliente">
-                ➕ Nuevo cliente
-              </button>
-            </div>
 
-            <!-- Modal -->
-            <div class="modal fade" id="form_agregar_cliente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="form_agregar_clienteLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="form_agregar_clienteLabel">Registro cliente</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form method="POST">
-                      {% csrf_token %}
-                      <div class="input-group mb-3">
-                        <span class="input-group-text">{{ form.rut.label_tag }}</span>
-                        {{ form.rut }}
-                        {{ form.rut.errors }}
+{% block titulo %}Catálogo clientes{% endblock %}
 
-                      </div>
+{% block scripts %}
+<script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/dataTables.bootstrap5.min.css' %}">
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap5.min.js' %}"></script>
+<script>$(document).ready( function () {$('#atencionesTable').DataTable();} );</script>
+{% endblock %}
 
-                      <div class="mb-3">
-                        <div class="input-group mb-3">
-                          <span class="input-group-text">{{ form.nombres.label_tag }}</span>
-                          {{ form.nombres }}
-                          {{ form.nombres.errors }}
+{% block clientes %}active" aria-current="page{% endblock %}
 
-                        </div>
-                        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
-                      </div>
+{% block contenido %}    
+<div class="ms-auto col-xl-11 col-md-10 col-12 ps-5 mt-md-0 mt-5 pt-md-0 pt-3">
+  <div class="container m-2 p-0">
+    <h1>Clientes</h1>
+    <br>
+    <div class="mb-3">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#form_agregar_cliente">
+        ➕ Nuevo cliente
+      </button>
+    </div>
 
-                      <div class="mb-3">
-                        <div class="input-group mb-3">
-                          <span class="input-group-text">{{ form.apellidos.label_tag }}</span>
-                          {{ form.apellidos }}
-                          {{ form.apellidos.errors }}
-
-                        </div>
-                        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
-                      </div>
-
-                      <div class="mb-3">
-                        <div class="input-group mb-3">
-                          <span class="input-group-text">{{ form.fono_1.label_tag }}</span>
-                          {{ form.fono_1 }}
-                          {{ form.fono_1.errors }}
-                          <span class="input-group-text">{{ form.fono_2.label_tag }}</span>
-                          {{ form.fono_2 }}
-                          {{ form.fono_2.errors }}
-                        </div>
-                        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
-                      </div>
-
-                      <div class="mb-3">
-                        <div class="input-group mb-3">
-                          <span class="input-group-text">{{ form.email.label_tag }}</span>
-                          {{ form.email }}
-                          {{ form.email.errors }}
-                        </div>
-                        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
-                      </div>
-
-                      
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Registrar cliente</button>
-                  </div>
-                </form>
-                </div>
-              </div>
-            </div>
-          
-            <table class="table table-striped table-hover" id="clientesTable">
-              <thead>
-                <tr>
-                  <th scope="col"><h4>Rut</h4></th>
-                  <th scope="col"><h4>Nombre</h4></th>
-                  <th scope="col"><h4>Apellidos</h4></th>
-                  <th scope="col"><h4>Telefonos</h4></th>
-                  <th scope="col"><h4>Email</h4></th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                  {% for cliente in clientes %}
-                  <tr class="align-middle">
-                    <th scope="row">{{cliente.rut}}</th>
-                    <td class="text-capitalize">{{cliente.nombres}}</td>
-                    <td class="text-capitalize">{{cliente.apellidos}}</td>
-                    <td>
-                      +56 {{cliente.fono_1}}{% if cliente.fono_2 %}<br />+56
-                      {{cliente.fono_2}} {% endif %}
-                    </td>
-                    <td>{{cliente.email}}</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
-                          ⋮
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                          <li><a class="dropdown-item" type="button" href="{% url 'verCliente' cliente.id_cliente %}" >Editar Datos Cliente</a></li>
-                          <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#mascotas{{cliente.rut}}">Ver Mascotas</a></li>
-                          <li><a class="dropdown-item" type="button" href="{% url 'clienteDel' cliente.id_cliente %}">Deshabilitar Cliente</a></li>
-                        </ul>
-                      </div>
-                    </td>
-                  </tr>
-                  <div class="modal fade" id="mascotas{{cliente.rut}}" tabindex="-1" aria-labelledby="ModalLabel{{cliente.rut}}" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="ModalLabel{{cliente.rut}}">Mascotas de {{cliente.nombres}}</h1>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        {% for mascota in mascotas %}
-                        {% if mascota.id_dueno.rut == cliente.rut %}
-                        <div class="modal-body">
-                          <div class="card" style="width: 18rem;">
-                            <img src="../../{{mascota.url_imagen}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                              <h5 class="card-title text-capitalize">{{mascota.nombres}}</h5>
-                              <h6 class="card-subtitle mb-2 text-body-secondary">{{mascota.edad_meses}} meses - {% if mascota.sexo %}Macho{% else %}Hembra{% endif %}</h6>
-                              <p class="card-text text-capitalize">{{mascota.num_chip}} - {{mascota.id_raza.nombre_raza}} - {{mascota.id_raza.nombre_especie}}</p>
-                              <a href="#" class="btn btn-primary">Detalles mascota</a>
-                            </div>
-                          </div>
-                        </div>
-                        {% else %}
-                        <div class="modal-body">
-                          <p>El cliente no tiene mascotas registradas.</p>
-                        </div>
-                        {% endif %}
-                        {% endfor %}
-                      </div>
-                    </div>
-                  </div>                  
-                  {% endfor %}
-              </tbody>
-            </table>
+    <!-- Modal -->
+    <div class="modal fade" id="form_agregar_cliente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="form_agregar_clienteLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="form_agregar_clienteLabel">Registro cliente</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+          <div class="modal-body">
+            <form method="POST">
+              {% csrf_token %}
+              <div class="input-group mb-3">
+                <span class="input-group-text">{{ form.rut.label_tag }}</span>
+                {{ form.rut }}
+                {{ form.rut.errors }}
+
+              </div>
+
+              <div class="mb-3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text">{{ form.nombres.label_tag }}</span>
+                  {{ form.nombres }}
+                  {{ form.nombres.errors }}
+
+                </div>
+                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+              </div>
+
+              <div class="mb-3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text">{{ form.apellidos.label_tag }}</span>
+                  {{ form.apellidos }}
+                  {{ form.apellidos.errors }}
+
+                </div>
+                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+              </div>
+
+              <div class="mb-3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text">{{ form.fono_1.label_tag }}</span>
+                  {{ form.fono_1 }}
+                  {{ form.fono_1.errors }}
+                  <span class="input-group-text">{{ form.fono_2.label_tag }}</span>
+                  {{ form.fono_2 }}
+                  {{ form.fono_2.errors }}
+                </div>
+                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+              </div>
+
+              <div class="mb-3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text">{{ form.email.label_tag }}</span>
+                  {{ form.email }}
+                  {{ form.email.errors }}
+                </div>
+                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+              </div>
+
+                  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Registrar cliente</button>
+          </div>
+        </form>
         </div>
       </div>
     </div>
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-  </body>
-</html>
+  
+    <table class="table table-striped table-hover" id="clientesTable">
+      <thead>
+        <tr>
+          <th scope="col"><h4>Rut</h4></th>
+          <th scope="col"><h4>Nombre</h4></th>
+          <th scope="col"><h4>Apellidos</h4></th>
+          <th scope="col"><h4>Telefonos</h4></th>
+          <th scope="col"><h4>Email</h4></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for cliente in clientes %}
+          <tr class="align-middle">
+            <th scope="row">{{cliente.rut}}</th>
+            <td class="text-capitalize">{{cliente.nombres}}</td>
+            <td class="text-capitalize">{{cliente.apellidos}}</td>
+            <td>
+              +56 {{cliente.fono_1}}{% if cliente.fono_2 %}<br />+56
+              {{cliente.fono_2}} {% endif %}
+            </td>
+            <td>{{cliente.email}}</td>
+            <td>
+              <div class="btn-group">
+                <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
+                  ⋮
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" type="button" href="{% url 'verCliente' cliente.id_cliente %}" >Editar Datos Cliente</a></li>
+                  <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#mascotas{{cliente.rut}}">Ver Mascotas</a></li>
+                  <li><a class="dropdown-item" type="button" href="{% url 'clienteDel' cliente.id_cliente %}">Deshabilitar Cliente</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          <div class="modal fade" id="mascotas{{cliente.rut}}" tabindex="-1" aria-labelledby="ModalLabel{{cliente.rut}}" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="ModalLabel{{cliente.rut}}">Mascotas de {{cliente.nombres}}</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                {% for mascota in mascotas %}
+                {% if mascota.id_dueno.rut == cliente.rut %}
+                <div class="modal-body">
+                  <div class="card" style="width: 18rem;">
+                    <img src="../../{{mascota.url_imagen}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title text-capitalize">{{mascota.nombres}}</h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">{{mascota.edad_meses}} meses - {% if mascota.sexo %}Macho{% else %}Hembra{% endif %}</h6>
+                      <p class="card-text text-capitalize">{{mascota.num_chip}} - {{mascota.id_raza.nombre_raza}} - {{mascota.id_raza.nombre_especie}}</p>
+                      <a href="#" class="btn btn-primary">Detalles mascota</a>
+                    </div>
+                  </div>
+                </div>
+                {% else %}
+                <div class="modal-body">
+                  <p>El cliente no tiene mascotas registradas.</p>
+                </div>
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>                  
+          {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
