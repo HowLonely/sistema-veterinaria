@@ -1,5 +1,5 @@
 from django import forms
-from veterinaria.models import Clientes, Asistentes, FichasClinicas, Veterinarios, Atenciones
+from veterinaria.models import Usuario, TipoUsuario, Cliente, Mascota, Atencion
 
 class ClienteForm(forms.ModelForm):
     rut = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '12345678-9'}))
@@ -11,7 +11,7 @@ class ClienteForm(forms.ModelForm):
 
 
     class Meta:
-        model = Clientes
+        model = Cliente
         fields = '__all__'
 
 class AtencionForm(forms.ModelForm):
@@ -21,25 +21,19 @@ class AtencionForm(forms.ModelForm):
     tratamiento = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Ingrese Tratamiento'}))
     observaciones = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Ingrese Observaciones'}))
     fecha_atencion = forms.DateField(widget=forms.DateInput(attrs={'class':'form-control','placeholder': 'Día/Mes/Año', 'type': 'date'}))
-    agendada_por_asistente = forms.ModelChoiceField(
-        queryset=Asistentes.objects.all(),
-        empty_label="Selecciona asistente",
-        widget=forms.Select(attrs={'class':'form-select'}),
-        label="Asistente"
-    )
     id_ficha_clinica = forms.ModelChoiceField(
-        queryset=FichasClinicas.objects.all(),
+        queryset=Mascota.objects.all(),
         empty_label="Selecciona ficha clínica",
         widget=forms.Select(attrs={'class':'form-select'}),
         label="Ficha Clínica"
     )
     id_veterinario = forms.ModelChoiceField(
-        queryset=Veterinarios.objects.all(),
+        queryset=Usuario.objects.filter(),
         empty_label="Selecciona veterinario",
         widget=forms.Select(attrs={'class':'form-select'}),
         label="Veterinario"
     )
 
     class Meta:
-        model = Atenciones
+        model = Atencion
         fields = '__all__'
