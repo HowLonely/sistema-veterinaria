@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap5.min.css' %}">
 <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
 <script src="{% static 'js/dataTables.bootstrap5.min.js' %}"></script>
-<script>$(document).ready( function () {$('#atencionesTable').DataTable();} );</script>
+<script>$(document).ready( function () {$('#clientesTable').DataTable();} );</script>
 {% endblock %}
 
 {% block clientes %}active" aria-current="page{% endblock %}
@@ -138,7 +138,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 {% for mascota in mascotas %}
-                {% if mascota.id_dueno.rut == cliente.rut %}
+                {% if mascota.id_cliente.rut == cliente.rut %}
                 <div class="modal-body">
                   <div class="card" style="width: 18rem;">
                     <img src="../../{{mascota.url_imagen}}" class="card-img-top" alt="...">

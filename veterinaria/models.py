@@ -1,4 +1,6 @@
+from datetime import timezone
 from django.db import models
+import os
 
 class TipoUsuario(models.Model):
     rol = models.CharField(max_length=95)
@@ -41,12 +43,22 @@ class Ficha_clinica(models.Model):
     num_chip = models.CharField(max_length=145, null=True)
     edad_meses = models.IntegerField(null=True)
     sexo = models.BooleanField(null=True)
-    url_imagen = models.CharField(max_length=145, null=True)
+
+    def generarRuta(instance, filename):
+        extension = os.path.splitext(filename)[1][1:]
+        ruta = 'mascotas'
+        fecha = timezone.now().strftime("%d%m%Y_%H%M%S")
+        nombre = "{}.{}".format(fecha, extension)
+        return os.path.join(ruta, nombre)
+    
+    imagen = models.ImageField(upload_to=generarRuta, null=True, default='mascotas/mascota.png')
     id_raza = models.ForeignKey(Raza, on_delete=models.CASCADE, null=True)
     id_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.nombre_mascota
+
+
 
 class Atencion(models.Model):
     id_mascota = models.ForeignKey(Ficha_clinica, on_delete=models.CASCADE, null=True)

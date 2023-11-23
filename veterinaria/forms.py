@@ -8,10 +8,26 @@ class ClienteForm(forms.ModelForm):
     fono_1 = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '9 12345678'}))
     fono_2 = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '9 12345678'}))
     email = forms.CharField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'correo@dom.cl'}))
+    class Meta:
+        model = Cliente
+        fields = '__all__'
+
+class FichaForm(forms.ModelForm):
+
+    opciones_sexo = {
+        (0, 'Hembra'),
+        (1, 'Macho'),
+    }
+
+    nombre_mascota = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Pepito'}))
+    num_chip = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '123456'}))
+    edad_meses = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '32'}))
+    sexo = forms.ChoiceField(choices=opciones_sexo, widget=forms.Select(attrs={'class': 'form-select'}))
+    imagen = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}), required=False, label='Subir imagen')
 
 
     class Meta:
-        model = Cliente
+        model = Ficha_clinica
         fields = '__all__'
 
 class AtencionForm(forms.ModelForm):

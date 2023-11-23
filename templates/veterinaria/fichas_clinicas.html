@@ -32,13 +32,20 @@
             <th scope="col"><h4>Sexo</h4></th>
             <th scope="col"><h4>Raza</h4></th>
             <th scope="col"><h4>Dueño</h4></th>
+            <th scope="col"></th>
+
           </tr>
         </thead>
         <tbody>
             {% for ficha in fichas %}
             <tr class="align-middle">
               <th scope="row">{{ficha.id}}</th>
-              
+              <td class="text-capitalize">{{ficha.nombre_mascota}}</td>
+              <td class="text-capitalize">{{ficha.num_chip}}</td>
+              <td class="text-capitalize">{{ficha.edad_meses}}</td>
+              <td class="text-capitalize">{{ ficha.sexo|yesno:"Macho,Hembra" }}</td>
+              <td class="text-capitalize">{{ficha.id_raza.nombre_raza}}</td>
+              <td class="text-capitalize">{{ficha.id_cliente.nombres}}</td>
               <td>
                 <div class="btn-group">
                   <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
@@ -47,12 +54,11 @@
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" type="button" href="{% url 'verFicha' ficha.id %}" >Editar Atención</a></li>
                     <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#atencion{{atencion.id_atencion}}">Ver Detalles</a></li>
-                    <li><a class="dropdown-item" type="button" href="{% url 'atencionDel' atencion.id_atencion %}">Eliminar Atención</a></li>
+                    <li><a class="dropdown-item" type="button" href="{% url 'fichaDel' ficha.id %}">Eliminar Atención</a></li>
                   </ul>
                 </div>
               </td>
-            </tr>
-                           
+            </tr>     
             {% endfor %}
         </tbody>
       </table>

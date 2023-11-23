@@ -8,6 +8,7 @@ from veterinaria import models
 def inicio(req):
     return render(req, 'veterinaria/index.html')
 
+# ================ CLIENTES =====================
 def clientes(req):
     if req.method == 'POST':
         form = forms.ClienteForm(req.POST)
@@ -46,20 +47,45 @@ def eliminar_cliente(req, cliente_id):
         
     return render(req, 'veterinaria/clienteDel.html', {'cliente': cliente}) 
 
+
+# ================ FICHAS CLINICAS =====================
 def fichas(req):
     data = {
         'fichas': models.Ficha_clinica.objects.all(),
         'razas': models.Raza.objects.all(),
         'clientes': models.Cliente.objects.all(),
     }
-    return render(req, 'veterinaria/fichas.html', data)
+    return render(req, 'veterinaria/fichas_clinicas.html', data)
 
 def ver_ficha(req, ficha_id):
     ficha_clinica = get_object_or_404(models.Ficha_clinica, id_ficha=ficha_id)
     form = forms.AtencionForm(instance=ficha_clinica)
 
-    return render(req, 'veterinaria/atencion.html', {'form': form, 'ficha_clinica': ficha_clinica})
+    return render(req, 'veterinaria/ficha_clinica.html', {'form': form, 'ficha_clinica': ficha_clinica})
 
+def editar_ficha(req, ficha_id):
+    ficha_clinica = get_object_or_404(models.Ficha_clinica, id_atencion=ficha_id)
+
+    if req.method == 'POST':
+        form = forms.FichaForm(req.POST, instance=ficha_clinica)
+        if form.is_valid():
+            form.save()
+            return redirect('/fichas_clinicas/')
+    else:
+        form = forms.FichaForm(instance=ficha_clinica)
+    return render(req, 'veterinaria/ficha_clinica.html', {'form': form})
+
+def eliminar_ficha(req, ficha_id):
+    ficha_clinica = get_object_or_404(models.Ficha_clinica, id_ficha=ficha_id)
+
+    if req.method == 'POST':
+        ficha_clinica.delete()
+        return redirect('/fichas_clinicas/')
+        
+    return render(req, 'veterinaria/ficha_clinicaDel.html', {'ficha_clinica': ficha_clinica})  
+
+
+# ================ ATENCIONES =====================
 def atenciones(req):
     if req.method == 'POST':
         form = forms.AtencionForm(req.POST)
