@@ -22,4 +22,6 @@ urlpatterns = [
     path('atencionEdit/<int:atencion_id>/', views.editar_atencion, name='atencionEdit'),
     path('atencionDel/<int:atencion_id>/', views.eliminar_atencion, name='atencionDel'),
     # path('clienteAdd/', views.crear_cliente, name='crearCliente'),
+
+    path('razas/', views.razas, name='razas'),
 ]

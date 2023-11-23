@@ -1,5 +1,5 @@
 from django import forms
-from veterinaria.models import Usuario, TipoUsuario, Cliente, Ficha_clinica, Atencion
+from veterinaria.models import Usuario, TipoUsuario, Cliente, Ficha_clinica, Atencion, Raza
 
 class ClienteForm(forms.ModelForm):
     rut = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '12345678-9'}))
@@ -52,4 +52,12 @@ class AtencionForm(forms.ModelForm):
 
     class Meta:
         model = Atencion
+        fields = '__all__'
+
+class RazaForm(forms.ModelForm):
+    nombre_especie = forms.CharField()
+    nombre_raza = forms.CharField()
+
+    class Meta:
+        model = Raza
         fields = '__all__'

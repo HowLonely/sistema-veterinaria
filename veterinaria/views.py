@@ -123,3 +123,5 @@ def eliminar_atencion(req, atencion_id):
         
     return render(req, 'veterinaria/atencionDel.html', {'atenciones': atencion})    
 
+def razas(req):
+    return render(req, 'veterinaria/especies.html', { 'razas': models.Raza.objects.all(), 'mascotas': models.Ficha_clinica.objects.all() })
