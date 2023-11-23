@@ -124,4 +124,16 @@ def eliminar_atencion(req, atencion_id):
     return render(req, 'veterinaria/atencionDel.html', {'atenciones': atencion})    
 
 def razas(req):
-    return render(req, 'veterinaria/especies.html', { 'razas': models.Raza.objects.all(), 'mascotas': models.Ficha_clinica.objects.all() })
+    if req.method == 'POST':
+        form = forms.RazaForm(req.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(req.path)
+    else:
+        form = forms.RazaForm()
+    return render(req, 'veterinaria/especies.html', { 'form': form, 'razas': models.Raza.objects.all(), 'mascotas': models.Ficha_clinica.objects.all() })
+
+def eliminar_raza(req, raza_id):
+    raza = get_object_or_404(models.Raza, id=raza_id)
+    raza.delete()
+    return redirect('/razas/')

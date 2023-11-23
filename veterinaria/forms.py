@@ -55,8 +55,8 @@ class AtencionForm(forms.ModelForm):
         fields = '__all__'
 
 class RazaForm(forms.ModelForm):
-    nombre_especie = forms.CharField()
-    nombre_raza = forms.CharField()
+    nombre_especie = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese Especie', 'id': 'myAutocomplete'}))
+    nombre_raza = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese Raza'}))
 
     class Meta:
         model = Raza

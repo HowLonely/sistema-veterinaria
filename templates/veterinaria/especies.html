@@ -8,7 +8,15 @@
 <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap5.min.css' %}">
 <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
 <script src="{% static 'js/dataTables.bootstrap5.min.js' %}"></script>
+<script src="{% static 'js/autocomplete.js' %}"></script>
 <script>$(document).ready( function () {$('#razasTable').DataTable();} );</script>
+<script>var datasrc = [];
+{% for raza in razas %}
+  datasrc.push({label: '{{ raza.nombre_especie }}', value: '{{ raza.nombre_especie }}'});
+{% endfor %}
+console.log(datasrc);
+const ac = new Autocomplete(document.getElementById('myAutocomplete'), {data: datasrc});
+</script>
 {% endblock %}
 
 {% block razas %}active" aria-current="page{% endblock %}
@@ -37,16 +45,15 @@
             <form method="POST">
               {% csrf_token %}
               <div class="input-group mb-3">
-                <span class="input-group-text">{{ form.nombre_raza.label_tag }}</span>
-                {{ form.nombre_raza }}
-                {{ form.nombre_raza.errors }}
+                <span class="input-group-text">{{ form.nombre_especie.label_tag }}</span>
+                {{ form.nombre_especie }}
+                {{ form.nombre_especie.errors }}
               </div>
               <div class="mb-3">
                 <div class="input-group mb-3">
-                  <span class="input-group-text">{{ form.nombre_especie.label_tag }}</span>
-                  {{ form.nombre_especie }}
-                  {{ form.nombre_especie.errors }}
-
+                  <span class="input-group-text">{{ form.nombre_raza.label_tag }}</span>
+                  {{ form.nombre_raza }}
+                  {{ form.nombre_raza.errors }}
                 </div>
                 <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
               </div>                  
@@ -83,7 +90,7 @@
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li><a class="dropdown-item" type="button" href="" >Editar Datos Raza</a></li>
                   <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#raza{{raza.id}}">Ver Mascotas de esta raza</a></li>
-                  <li><a class="dropdown-item" type="button" href="">Eliminar Raza</a></li>
+                  <li><a class="dropdown-item" type="button" href="{% url 'eliminar_raza' raza.id %}">Eliminar Raza</a></li>
                 </ul>
               </div>
             </td>
