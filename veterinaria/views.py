@@ -18,7 +18,7 @@ def clientes(req):
     else:
         form = forms.ClienteForm
     
-    return render(req, 'veterinaria/clientes.html', {'form': form, 'clientes': models.Cliente.objects.all(), 'mascotas': models.Ficha_clinica.objects.all(), 'razas': models.Raza.objects.all()})
+    return render(req, 'veterinaria/clientes.html', {'form': form, 'clientes': models.Cliente.objects.all(), 'mascotas': models.FichaClinica.objects.all(), 'razas': models.Raza.objects.all()})
 
 def ver_cliente(req, cliente_id):
     cliente = get_object_or_404(models.Cliente, id_cliente=cliente_id)
@@ -51,20 +51,20 @@ def eliminar_cliente(req, cliente_id):
 # ================ FICHAS CLINICAS =====================
 def fichas(req):
     data = {
-        'fichas': models.Ficha_clinica.objects.all(),
+        'fichas': models.FichaClinica.objects.all(),
         'razas': models.Raza.objects.all(),
         'clientes': models.Cliente.objects.all(),
     }
     return render(req, 'veterinaria/fichas_clinicas.html', data)
 
 def ver_ficha(req, ficha_id):
-    ficha_clinica = get_object_or_404(models.Ficha_clinica, id_ficha=ficha_id)
+    ficha_clinica = get_object_or_404(models.FichaClinica, id_ficha=ficha_id)
     form = forms.AtencionForm(instance=ficha_clinica)
 
     return render(req, 'veterinaria/ficha_clinica.html', {'form': form, 'ficha_clinica': ficha_clinica})
 
 def editar_ficha(req, ficha_id):
-    ficha_clinica = get_object_or_404(models.Ficha_clinica, id_atencion=ficha_id)
+    ficha_clinica = get_object_or_404(models.FichaClinica, id_atencion=ficha_id)
 
     if req.method == 'POST':
         form = forms.FichaForm(req.POST, instance=ficha_clinica)
@@ -76,7 +76,7 @@ def editar_ficha(req, ficha_id):
     return render(req, 'veterinaria/ficha_clinica.html', {'form': form})
 
 def eliminar_ficha(req, ficha_id):
-    ficha_clinica = get_object_or_404(models.Ficha_clinica, id_ficha=ficha_id)
+    ficha_clinica = get_object_or_404(models.FichaClinica, id_ficha=ficha_id)
 
     if req.method == 'POST':
         ficha_clinica.delete()
@@ -131,7 +131,7 @@ def razas(req):
             return redirect(req.path)
     else:
         form = forms.RazaForm()
-    return render(req, 'veterinaria/especies.html', { 'form': form, 'razas': models.Raza.objects.all(), 'mascotas': models.Ficha_clinica.objects.all() })
+    return render(req, 'veterinaria/especies.html', { 'form': form, 'razas': models.Raza.objects.all(), 'mascotas': models.FichaClinica.objects.all() })
 
 def eliminar_raza(req, raza_id):
     raza = get_object_or_404(models.Raza, id=raza_id)

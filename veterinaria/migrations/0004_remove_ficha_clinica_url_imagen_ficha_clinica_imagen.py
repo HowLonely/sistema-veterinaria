@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='ficha_clinica',
             name='imagen',
-            field=models.ImageField(default='mascotas/mascota.png', null=True, upload_to=veterinaria.models.Ficha_clinica.generarRuta),
+            field=models.ImageField(default='mascotas/mascota.png', null=True, upload_to=veterinaria.models.FichaClinica.generarRuta),
         ),
     ]

@@ -1,5 +1,5 @@
 from django import forms
-from veterinaria.models import Usuario, TipoUsuario, Cliente, Ficha_clinica, Atencion, Raza
+from veterinaria.models import CustomUser, TipoUsuario, Cliente, FichaClinica, Atencion
 
 class ClienteForm(forms.ModelForm):
     rut = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '12345678-9'}))
@@ -24,10 +24,10 @@ class FichaForm(forms.ModelForm):
     edad_meses = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '32'}))
     sexo = forms.ChoiceField(choices=opciones_sexo, widget=forms.Select(attrs={'class': 'form-select'}))
     imagen = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}), required=False, label='Subir imagen')
-
+    
 
     class Meta:
-        model = Ficha_clinica
+        model = FichaClinica
         fields = '__all__'
 
 class AtencionForm(forms.ModelForm):
@@ -38,13 +38,13 @@ class AtencionForm(forms.ModelForm):
     observaciones = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Ingrese Observaciones'}))
     fecha_atencion = forms.DateField(widget=forms.DateInput(attrs={'class':'form-control','placeholder': 'Día/Mes/Año', 'type': 'date'}))
     id_ficha_clinica = forms.ModelChoiceField(
-        queryset=Ficha_clinica.objects.all(),
+        queryset=FichaClinica.objects.all(),
         empty_label="Selecciona ficha clínica",
         widget=forms.Select(attrs={'class':'form-select'}),
         label="Ficha Clínica"
     )
     id_veterinario = forms.ModelChoiceField(
-        queryset=Usuario.objects.filter(),
+        queryset=CustomUser.objects.filter(),
         empty_label="Selecciona veterinario",
         widget=forms.Select(attrs={'class':'form-select'}),
         label="Veterinario"
@@ -52,12 +52,4 @@ class AtencionForm(forms.ModelForm):
 
     class Meta:
         model = Atencion
-        fields = '__all__'
-
-class RazaForm(forms.ModelForm):
-    nombre_especie = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese Especie', 'id': 'myAutocomplete'}))
-    nombre_raza = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese Raza'}))
-
-    class Meta:
-        model = Raza
         fields = '__all__'
