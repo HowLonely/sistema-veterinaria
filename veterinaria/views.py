@@ -17,16 +17,16 @@ def clientes(req):
     else:
         form = forms.ClienteForm
     
-    return render(req, 'veterinaria/clientes.html', {'form': form, 'clientes': models.Clientes.objects.all(), 'mascotas': models.Mascotas.objects.all(), 'razas': models.Razas.objects.all()})
+    return render(req, 'veterinaria/clientes.html', {'form': form, 'clientes': models.Cliente.objects.all(), 'mascotas': models.Ficha_clinica.objects.all(), 'razas': models.Raza.objects.all()})
 
 def ver_cliente(req, cliente_id):
-    cliente = get_object_or_404(models.Clientes, id_cliente=cliente_id)
+    cliente = get_object_or_404(models.Cliente, id_cliente=cliente_id)
     form = forms.ClienteForm(instance=cliente)
 
     return render(req, 'veterinaria/cliente.html', {'form': form, 'cliente': cliente})
 
 def editar_cliente(req, cliente_id):
-    cliente = get_object_or_404(models.Clientes, id_cliente=cliente_id)
+    cliente = get_object_or_404(models.Cliente, id_cliente=cliente_id)
 
     if req.method == 'POST':
         form = forms.ClienteForm(req.POST, instance=cliente)
@@ -38,7 +38,7 @@ def editar_cliente(req, cliente_id):
         return render(req, 'veterinaria/cliente.html', {'form': form})
 
 def eliminar_cliente(req, cliente_id):
-    cliente = get_object_or_404(models.Clientes, id_cliente=cliente_id)
+    cliente = get_object_or_404(models.Cliente, id_cliente=cliente_id)
 
     if req.method == 'POST':
         cliente.delete()
@@ -48,11 +48,17 @@ def eliminar_cliente(req, cliente_id):
 
 def fichas(req):
     data = {
-        'mascotas': models.Mascotas.objects.all(),
-        'razas': models.Razas.objects.all(),
-        'clientes': models.Clientes.objects.all(),
+        'fichas': models.Ficha_clinica.objects.all(),
+        'razas': models.Raza.objects.all(),
+        'clientes': models.Cliente.objects.all(),
     }
     return render(req, 'veterinaria/fichas.html', data)
+
+def ver_ficha(req, ficha_id):
+    ficha_clinica = get_object_or_404(models.Ficha_clinica, id_ficha=ficha_id)
+    form = forms.AtencionForm(instance=ficha_clinica)
+
+    return render(req, 'veterinaria/atencion.html', {'form': form, 'ficha_clinica': ficha_clinica})
 
 def atenciones(req):
     if req.method == 'POST':
@@ -62,16 +68,16 @@ def atenciones(req):
             return redirect(req.path)
     else:
         form = forms.AtencionForm()
-    return render(req, 'veterinaria/atenciones.html', {'form': form, 'atenciones': models.Atenciones.objects.all() })
+    return render(req, 'veterinaria/atenciones.html', {'form': form, 'atenciones': models.Atencion.objects.all() })
 
 def ver_atencion(req, atencion_id):
-    atencion = get_object_or_404(models.Atenciones, id_atencion=atencion_id)
+    atencion = get_object_or_404(models.Atencion, id_atencion=atencion_id)
     form = forms.AtencionForm(instance=atencion)
 
     return render(req, 'veterinaria/atencion.html', {'form': form, 'atencion': atencion})
 
 def editar_atencion(req, atencion_id):
-    atencion = get_object_or_404(models.Atenciones, id_atencion=atencion_id)
+    atencion = get_object_or_404(models.Atencion, id_atencion=atencion_id)
 
     if req.method == 'POST':
         form = forms.AtencionForm(req.POST, instance=atencion)
@@ -83,7 +89,7 @@ def editar_atencion(req, atencion_id):
     return render(req, 'veterinaria/atencion.html', {'form': form})
 
 def eliminar_atencion(req, atencion_id):
-    atencion = get_object_or_404(models.Atenciones, id_atencion=atencion_id)
+    atencion = get_object_or_404(models.Atencion, id_atencion=atencion_id)
 
     if req.method == 'POST':
         atencion.delete()

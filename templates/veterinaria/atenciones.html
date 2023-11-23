@@ -112,7 +112,7 @@
         <tbody>
             {% for atencion in atenciones %}
             <tr class="align-middle">
-              <th scope="row">{{atencion.id_atencion}}</th>
+              <th scope="row">{{atencion.id}}</th>
               <td>{{atencion.fecha_atencion}}</td>
               <td class="text-capitalize">{{atencion.id_veterinario}}</td>
               <td>
@@ -126,18 +126,18 @@
                     ⋮
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" type="button" href="{% url 'verAtencion' atencion.id_atencion %}" >Editar Atención</a></li>
-                    <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#atencion{{atencion.id_atencion}}">Ver Detalles</a></li>
-                    <li><a class="dropdown-item" type="button" href="{% url 'atencionDel' atencion.id_atencion %}">Eliminar Atención</a></li>
+                    <li><a class="dropdown-item" type="button" href="{% url 'verAtencion' atencion.id %}" >Editar Atención</a></li>
+                    <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#atencion{{atencion.id}}">Ver Detalles</a></li>
+                    <li><a class="dropdown-item" type="button" href="{% url 'atencionDel' atencion.id %}">Eliminar Atención</a></li>
                   </ul>
                 </div>
               </td>
             </tr>
-            <div class="modal fade" id="atencion{{atencion.id_atencion}}" tabindex="-1" aria-labelledby="ModalLabel{{atencion.id_atencion}}" aria-hidden="true">
+            <div class="modal fade" id="atencion{{atencion.id}}" tabindex="-1" aria-labelledby="ModalLabel{{atencion.id}}" aria-hidden="true">
               <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ModalLabel{{atencion.id_atencion}}">Atención {{atencion.id_atencion}}</h1>
+                    <h1 class="modal-title fs-5" id="ModalLabel{{atencion.id}}">Atención {{atencion.id}}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">

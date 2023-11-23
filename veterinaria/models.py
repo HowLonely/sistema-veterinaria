@@ -36,7 +36,7 @@ class Cliente(models.Model):
     def __str__(self):
         return f"{self.nombres} {self.apellidos}"
 
-class Mascota(models.Model):
+class Ficha_clinica(models.Model):
     nombre_mascota = models.CharField(max_length=95)
     num_chip = models.CharField(max_length=145, null=True)
     edad_meses = models.IntegerField(null=True)
@@ -49,7 +49,7 @@ class Mascota(models.Model):
         return self.nombre_mascota
 
 class Atencion(models.Model):
-    id_mascota = models.ForeignKey(Mascota, on_delete=models.CASCADE, null=True)
+    id_mascota = models.ForeignKey(Ficha_clinica, on_delete=models.CASCADE, null=True)
     hora_ingreso = models.TimeField(null=True)
     hora_termino = models.TimeField(null=True)
     diagnostico = models.CharField(max_length=245, null=True)

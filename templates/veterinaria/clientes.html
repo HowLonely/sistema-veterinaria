@@ -123,9 +123,9 @@
                   ⋮
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" type="button" href="{% url 'verCliente' cliente.id_cliente %}" >Editar Datos Cliente</a></li>
+                  <li><a class="dropdown-item" type="button" href="{% url 'verCliente' cliente.id %}" >Editar Datos Cliente</a></li>
                   <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#mascotas{{cliente.rut}}">Ver Mascotas</a></li>
-                  <li><a class="dropdown-item" type="button" href="{% url 'clienteDel' cliente.id_cliente %}">Deshabilitar Cliente</a></li>
+                  <li><a class="dropdown-item" type="button" href="{% url 'clienteDel' cliente.id %}">Deshabilitar Cliente</a></li>
                 </ul>
               </div>
             </td>

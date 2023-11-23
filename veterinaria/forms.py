@@ -1,5 +1,5 @@
 from django import forms
-from veterinaria.models import Usuario, TipoUsuario, Cliente, Mascota, Atencion
+from veterinaria.models import Usuario, TipoUsuario, Cliente, Ficha_clinica, Atencion
 
 class ClienteForm(forms.ModelForm):
     rut = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '12345678-9'}))
@@ -22,7 +22,7 @@ class AtencionForm(forms.ModelForm):
     observaciones = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Ingrese Observaciones'}))
     fecha_atencion = forms.DateField(widget=forms.DateInput(attrs={'class':'form-control','placeholder': 'Día/Mes/Año', 'type': 'date'}))
     id_ficha_clinica = forms.ModelChoiceField(
-        queryset=Mascota.objects.all(),
+        queryset=Ficha_clinica.objects.all(),
         empty_label="Selecciona ficha clínica",
         widget=forms.Select(attrs={'class':'form-select'}),
         label="Ficha Clínica"
