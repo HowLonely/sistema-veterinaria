@@ -88,7 +88,7 @@ const ac = new Autocomplete(document.getElementById('myAutocomplete'), {data: da
                   ⋮
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" type="button" href="" >Editar Datos Raza</a></li>
+                  <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#form_modificar_raza{{raza.id}}">Editar Datos Raza</a></li>
                   <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#raza{{raza.id}}">Ver Mascotas de esta raza</a></li>
                   <li><a class="dropdown-item" type="button" href="{% url 'eliminar_raza' raza.id %}">Eliminar Raza</a></li>
                 </ul>
@@ -123,7 +123,39 @@ const ac = new Autocomplete(document.getElementById('myAutocomplete'), {data: da
                 {% endfor %}
               </div>
             </div>
-          </div>                  
+          </div>
+          <div class="modal fade" id="form_modificar_raza{{raza.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="form_modificar_razaLabel{{raza.id}}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="form_modificar_razaLabel{{raza.id}}">Modificar raza {{raza.id}}</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form method="POST" action="{% url 'modificar_raza' raza.id %}">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">{{ form.nombre_especie.label_tag }}</span>
+                      {{ form.nombre_especie }}
+                      {{ form.nombre_especie.errors }}
+                    </div>
+                    <div class="mb-3">
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">{{ form.nombre_raza.label_tag }}</span>
+                        {{ form.nombre_raza }}
+                        {{ form.nombre_raza.errors }}
+                      </div>
+                      <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                    </div>                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <button type="submit" class="btn btn-primary">Modificar raza</button>
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>
           {% endfor %}
       </tbody>
     </table>

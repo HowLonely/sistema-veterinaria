@@ -141,3 +141,14 @@ def eliminar_raza(req, raza_id):
     raza = get_object_or_404(models.Raza, id=raza_id)
     raza.delete()
     return redirect('/razas/')
+
+def modificar_raza(req, raza_id):
+    raza = get_object_or_404(models.Raza, id=raza_id)
+    if req.method == 'POST':
+        form = forms.RazaForm(req.POST, instance=raza)
+        if form.is_valid():
+            form.save()
+            return redirect('/razas/')
+    else:
+        form = forms.RazaForm(instance=raza)
+    return render(req, 'veterinaria/especies.html', { 'form': form, 'razas': models.Raza.objects.all(), 'mascotas': models.FichaClinica.objects.all() })

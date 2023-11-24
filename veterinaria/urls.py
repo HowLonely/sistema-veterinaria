@@ -25,4 +25,5 @@ urlpatterns = [
 
     path('razas/', views.razas, name='razas'),
     path('eliminar_raza/<int:raza_id>/', views.eliminar_raza, name='eliminar_raza'),
+    path('modificar_raza/<int:raza_id>/', views.modificar_raza, name='modificar_raza'),
 ]
