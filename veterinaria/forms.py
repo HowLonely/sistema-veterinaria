@@ -23,9 +23,8 @@ class FichaForm(forms.ModelForm):
     num_chip = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '123456'}))
     edad_meses = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '32'}))
     sexo = forms.ChoiceField(choices=opciones_sexo, widget=forms.Select(attrs={'class': 'form-select'}))
-    imagen = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}), required=False, label='Subir imagen')
+    imagen = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}), required=False, label='Subir imagen')
     
-
     class Meta:
         model = FichaClinica
         fields = '__all__'

@@ -21,13 +21,13 @@ def clientes(req):
     return render(req, 'veterinaria/clientes.html', {'form': form, 'clientes': models.Cliente.objects.all(), 'mascotas': models.FichaClinica.objects.all(), 'razas': models.Raza.objects.all()})
 
 def ver_cliente(req, cliente_id):
-    cliente = get_object_or_404(models.Cliente, id_cliente=cliente_id)
+    cliente = get_object_or_404(models.Cliente, id=cliente_id)
     form = forms.ClienteForm(instance=cliente)
 
     return render(req, 'veterinaria/cliente.html', {'form': form, 'cliente': cliente})
 
 def editar_cliente(req, cliente_id):
-    cliente = get_object_or_404(models.Cliente, id_cliente=cliente_id)
+    cliente = get_object_or_404(models.Cliente, id=cliente_id)
 
     if req.method == 'POST':
         form = forms.ClienteForm(req.POST, instance=cliente)
@@ -39,7 +39,7 @@ def editar_cliente(req, cliente_id):
         return render(req, 'veterinaria/cliente.html', {'form': form})
 
 def eliminar_cliente(req, cliente_id):
-    cliente = get_object_or_404(models.Cliente, id_cliente=cliente_id)
+    cliente = get_object_or_404(models.Cliente, id=cliente_id)
 
     if req.method == 'POST':
         cliente.delete()
@@ -50,21 +50,23 @@ def eliminar_cliente(req, cliente_id):
 
 # ================ FICHAS CLINICAS =====================
 def fichas(req):
-    data = {
-        'fichas': models.FichaClinica.objects.all(),
-        'razas': models.Raza.objects.all(),
-        'clientes': models.Cliente.objects.all(),
-    }
-    return render(req, 'veterinaria/fichas_clinicas.html', data)
+    if req.method == 'POST':
+        form = forms.FichaForm(req.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(req.path)
+    else:
+        form = forms.FichaForm
+    return render(req, 'veterinaria/fichas_clinicas.html', {'form': form,'fichas': models.FichaClinica.objects.all(), 'razas': models.Raza.objects.all(), 'clientes': models.Cliente.objects.all()})
 
 def ver_ficha(req, ficha_id):
-    ficha_clinica = get_object_or_404(models.FichaClinica, id_ficha=ficha_id)
-    form = forms.AtencionForm(instance=ficha_clinica)
+    ficha_clinica = get_object_or_404(models.FichaClinica, id=ficha_id)
+    form = forms.FichaForm(instance=ficha_clinica)
 
     return render(req, 'veterinaria/ficha_clinica.html', {'form': form, 'ficha_clinica': ficha_clinica})
 
 def editar_ficha(req, ficha_id):
-    ficha_clinica = get_object_or_404(models.FichaClinica, id_atencion=ficha_id)
+    ficha_clinica = get_object_or_404(models.FichaClinica, id=ficha_id)
 
     if req.method == 'POST':
         form = forms.FichaForm(req.POST, instance=ficha_clinica)
@@ -76,7 +78,7 @@ def editar_ficha(req, ficha_id):
     return render(req, 'veterinaria/ficha_clinica.html', {'form': form})
 
 def eliminar_ficha(req, ficha_id):
-    ficha_clinica = get_object_or_404(models.FichaClinica, id_ficha=ficha_id)
+    ficha_clinica = get_object_or_404(models.FichaClinica, id=ficha_id)
 
     if req.method == 'POST':
         ficha_clinica.delete()
@@ -97,13 +99,13 @@ def atenciones(req):
     return render(req, 'veterinaria/atenciones.html', {'form': form, 'atenciones': models.Atencion.objects.all() })
 
 def ver_atencion(req, atencion_id):
-    atencion = get_object_or_404(models.Atencion, id_atencion=atencion_id)
+    atencion = get_object_or_404(models.Atencion, id=atencion_id)
     form = forms.AtencionForm(instance=atencion)
 
     return render(req, 'veterinaria/atencion.html', {'form': form, 'atencion': atencion})
 
 def editar_atencion(req, atencion_id):
-    atencion = get_object_or_404(models.Atencion, id_atencion=atencion_id)
+    atencion = get_object_or_404(models.Atencion, id=atencion_id)
 
     if req.method == 'POST':
         form = forms.AtencionForm(req.POST, instance=atencion)
@@ -115,7 +117,7 @@ def editar_atencion(req, atencion_id):
     return render(req, 'veterinaria/atencion.html', {'form': form})
 
 def eliminar_atencion(req, atencion_id):
-    atencion = get_object_or_404(models.Atencion, id_atencion=atencion_id)
+    atencion = get_object_or_404(models.Atencion, id=atencion_id)
 
     if req.method == 'POST':
         atencion.delete()

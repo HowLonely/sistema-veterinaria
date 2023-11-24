@@ -1,0 +1,29 @@
+{% extends "veterinaria/base.html" %}
+
+{% block titulo %}Fichas Clinicas{% endblock %}
+
+{% block fichas %}active" aria-current="page{% endblock %}
+
+{% block contenido %}
+<div class="ms-auto col-xl-11 col-md-10 col-12 ps-5 mt-md-0 mt-5 pt-md-0 pt-3">
+  <div class="container m-0 p-0">
+    <h3>Confirmar Eliminación de Ficha Clínica</h3>
+    <div class="alert alert-danger h5">
+      ¿Estás seguro que deseas eliminar la Ficha clínica asociada a {{ficha_clinica.nombre_mascota}}?
+    </div>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="row text-center">
+        <div class="col">
+          <a class="btn btn-secondary" href="{% url 'fichas' %}">Cancelar</a>
+        </div>
+        <div class="col">
+          <button class="btn btn-danger" type="submit">
+            Confirmar Eliminación
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
