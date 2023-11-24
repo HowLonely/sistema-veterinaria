@@ -83,6 +83,28 @@
 
                 <div class="mb-3">
                   <div class="input-group mb-3">
+                    {{form.id_raza.label_tag}}
+                    <div>
+                      {{ form.id_raza }}
+                      {{ form.id_raza.errors }}
+                    </div>
+                    
+                  </div>
+                  <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                </div>
+                <div class="mb-3">
+                  <div class="input-group mb-3">
+                    {{form.id_cliente.label_tag}}
+                    <div>
+                      {{ form.id_cliente }}
+                      {{ form.id_cliente.errors }}
+                    </div>
+                    
+                  </div>
+                  <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                </div>
+                <div class="mb-3">
+                  <div class="input-group mb-3">
                     {{form.imagen.label_tag}}
                     <div>
                       {{ form.imagen }}

@@ -24,6 +24,18 @@ class FichaForm(forms.ModelForm):
     edad_meses = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '32'}))
     sexo = forms.ChoiceField(choices=opciones_sexo, widget=forms.Select(attrs={'class': 'form-select'}))
     imagen = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}), required=False, label='Subir imagen')
+    id_raza = forms.ModelChoiceField(
+        queryset=Raza.objects.all(),
+        empty_label="Selecciona raza",
+        widget=forms.Select(attrs={'class':'form-select'}),
+        label="Raza"
+    )
+    id_cliente = forms.ModelChoiceField(
+        queryset=Cliente.objects.all(),
+        empty_label="Selecciona cliente",
+        widget=forms.Select(attrs={'class':'form-select'}),
+        label="Cliente"
+    )
     
     class Meta:
         model = FichaClinica

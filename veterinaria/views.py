@@ -56,7 +56,7 @@ def fichas(req):
             form.save()
             return redirect(req.path)
     else:
-        form = forms.FichaForm
+        form = forms.FichaForm()
     return render(req, 'veterinaria/fichas_clinicas.html', {'form': form,'fichas': models.FichaClinica.objects.all(), 'razas': models.Raza.objects.all(), 'clientes': models.Cliente.objects.all()})
 
 def ver_ficha(req, ficha_id):

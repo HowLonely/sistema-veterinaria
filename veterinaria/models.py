@@ -16,7 +16,6 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-    
 class Raza(models.Model):
     nombre_raza = models.CharField(max_length=145)
     nombre_especie = models.CharField(max_length=145)
@@ -54,6 +53,8 @@ class FichaClinica(models.Model):
 
     def __str__(self):
         return self.nombre_mascota
+
+
 
 class Atencion(models.Model):
     id_mascota = models.ForeignKey(FichaClinica, on_delete=models.CASCADE, null=True)
