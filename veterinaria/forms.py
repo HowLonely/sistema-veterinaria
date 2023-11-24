@@ -34,7 +34,7 @@ class FichaForm(forms.ModelForm):
         queryset=Cliente.objects.all(),
         empty_label="Selecciona cliente",
         widget=forms.Select(attrs={'class':'form-select'}),
-        label="Cliente"
+        label="Dueño"
     )
     
     class Meta:

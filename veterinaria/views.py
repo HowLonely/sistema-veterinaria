@@ -74,7 +74,7 @@ def editar_ficha(req, ficha_id):
             if 'imagen' in req.FILES:
                 ficha_clinica.imagen = req.FILES['imagen']
             form.save()
-            return redirect('/fichas_clinicas/')
+            return redirect('/fichas/')
     else:
         form = forms.FichaForm(instance=ficha_clinica)
     return render(req, 'veterinaria/ficha_clinica.html', {'form': form})
