@@ -51,7 +51,7 @@ def eliminar_cliente(req, cliente_id):
 # ================ FICHAS CLINICAS =====================
 def fichas(req):
     if req.method == 'POST':
-        form = forms.FichaForm(req.POST)
+        form = forms.FichaForm(req.POST, req.FILES)
         if form.is_valid():
             form.save()
             return redirect(req.path)
@@ -69,8 +69,10 @@ def editar_ficha(req, ficha_id):
     ficha_clinica = get_object_or_404(models.FichaClinica, id=ficha_id)
 
     if req.method == 'POST':
-        form = forms.FichaForm(req.POST, instance=ficha_clinica)
+        form = forms.FichaForm(req.POST, req.FILES, instance=ficha_clinica)
         if form.is_valid():
+            if 'imagen' in req.FILES:
+                ficha_clinica.imagen = req.FILES['imagen']
             form.save()
             return redirect('/fichas_clinicas/')
     else:

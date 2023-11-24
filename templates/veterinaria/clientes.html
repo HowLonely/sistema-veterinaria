@@ -8,7 +8,17 @@
 <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap5.min.css' %}">
 <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
 <script src="{% static 'js/dataTables.bootstrap5.min.js' %}"></script>
-<script>$(document).ready( function () {$('#clientesTable').DataTable();} );</script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"></script>
+
+<script>
+  $(document).ready( function () {
+      $('#clientesTable').DataTable({
+          language: {
+              url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
+          }
+      });
+  } );
+</script>
 {% endblock %}
 
 {% block clientes %}active" aria-current="page{% endblock %}

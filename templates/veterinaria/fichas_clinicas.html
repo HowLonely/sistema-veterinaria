@@ -8,7 +8,17 @@
 <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap5.min.css' %}">
 <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
 <script src="{% static 'js/dataTables.bootstrap5.min.js' %}"></script>
-<script>$(document).ready( function () {$('#fichasTable').DataTable();} );</script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"></script>
+
+<script>
+  $(document).ready( function () {
+      $('#fichasTable').DataTable({
+          language: {
+              url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
+          }
+      });
+  } );
+</script>
 {% endblock %}
 
 {% block fichas %}active" aria-current="page{% endblock %}
@@ -73,8 +83,12 @@
 
                 <div class="mb-3">
                   <div class="input-group mb-3">
-                    {{ form.imagen }}
-                    {{ form.imagen.errors }}
+                    {{form.imagen.label_tag}}
+                    <div>
+                      {{ form.imagen }}
+                      {{ form.imagen.errors }}
+                    </div>
+                    
                   </div>
                   <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
