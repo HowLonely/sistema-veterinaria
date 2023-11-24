@@ -151,7 +151,7 @@
                 {% if mascota.id_cliente.rut == cliente.rut %}
                 <div class="modal-body">
                   <div class="card" style="width: 18rem;">
-                    <img src="../../{{mascota.url_imagen}}" class="card-img-top" alt="...">
+                    <img src="{{mascota.imagen.url}}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title text-capitalize">{{mascota.nombres}}</h5>
                       <h6 class="card-subtitle mb-2 text-body-secondary">{{mascota.edad_meses}} meses - {% if mascota.sexo %}Macho{% else %}Hembra{% endif %}</h6>
