@@ -7,15 +7,17 @@
 {% block contenido %}
 <div class="ms-auto col-xl-11 col-md-10 col-12 ps-5 mt-md-0 mt-5 pt-md-0 pt-3">
   <div class="container m-0 p-0">
-    <h1>Atención</h1>
-    <form method="POST" action="{% url 'fichaEdit' ficha_clinica.id %}">
+    <h1>Ficha clinica</h1>
+    <form method="POST" action="{% url 'fichaEdit' ficha_clinica.id %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row mt-5">
             
             <div class="col-4">
                 <div class="row">
-                    <div class="mb-3 text-center">
-                        <img src="{{form.imagen.value.url}}" alt="foto de mascota" width="210">
+                    <div class="mb-3">
+                        <div class="text-center">
+                            <img src="{{form.imagen.value.url}}" alt="foto de mascota" width="210">
+                        </div>
                         <div>
                             {{ form.imagen }}
                             {{ form.imagen.errors }}
@@ -27,25 +29,25 @@
             </div>
 
             <div class="col offset-1">
-                <div class="row mb-3">
+                <div class="mb-3">
                     {{ form.nombre_mascota.label_tag }}
                     {{ form.nombre_mascota }}
                     {{ form.nombre_mascota.errors }}
                     <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
-                <div class="row mb-3">
+                <div class="mb-3">
                     {{ form.num_chip.label_tag }}
                     {{ form.num_chip }}
                     {{ form.num_chip.errors }}
                     <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
-                <div class="row mb-3">
+                <div class="mb-3">
                     {{ form.edad_meses.label_tag }}
                     {{ form.edad_meses }}
                     {{ form.edad_meses.errors }}
                     <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
-                <div class="row mb-3">
+                <div class="mb-3">
                     {{ form.sexo.label_tag }}
                     {{ form.sexo }}
                     {{ form.sexo.errors }}
@@ -54,13 +56,11 @@
             </div>
             
         </div>
-        
-        
+
+        <div class="mb-3 text-center">
+            <button type="button" class="btn btn-danger" onclick="window.location.href = '{% url 'fichaDel' ficha_clinica.id %}';">Eliminar ficha</button>
+            <button type="submit" class="btn btn-warning">Editar ficha</button>
+        </div>
     </form>
-  <div class="mb-3 text-center">
-    <button type="button" class="btn btn-danger">Eliminar ficha</button>
-    <button type="submit" class="btn btn-warning">Editar ficha</button>
-  </div>
-  </form>
 </div>
 {% endblock %}
