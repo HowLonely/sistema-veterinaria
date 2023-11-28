@@ -12,7 +12,7 @@
     <div class="container d-flex justify-content-around m-5">
 
       <div class="card" style="width: 18rem;">
-        <img src="../../static/images/mantenedor-cliente.jpg" class="card-img-top" alt="...">
+        <img src="{% static 'images/mantenedor-cliente.jpg' %}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Mantenedor clientes</h5>
           <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, repellat aperiam!</p>
@@ -21,7 +21,7 @@
       </div>
 
       <div class="card" style="width: 18rem;">
-        <img src="../../static/images/mantenedor-atenciones.jpg" class="card-img-top" alt="...">
+        <img src="{% static 'images/mantenedor-atenciones.jpg' %}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Historial de atenciones</h5>
           <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, repellat aperiam!</p>
@@ -30,13 +30,22 @@
       </div>
 
       <div class="card" style="width: 18rem;">
-        <img src="../../static/images/mantenedor-mascotas.jpg" class="card-img-top" alt="...">
+        <img src="{% static 'images/mantenedor-mascotas.jpg' %}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Fichas clinicas</h5>
           <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, repellat aperiam!</p>
-          <a href="{% url 'fichas' %}" class="btn btn-primary">Ir al mantenedor</a>
+          <a href="{% url 'fichas' %}" class="btn btn-primary">Ir a fichas clínicas</a>
         </div>
       </div> 
+
+      <div class="card" style="width: 18rem;">
+        <img src="{% static 'images/mantenedor-razas.png' %}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Mantenedor de razas</h5>
+          <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, repellat aperiam!</p>
+          <a href="{% url 'razas' %}" class="btn btn-primary">Ir al mantenedor</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

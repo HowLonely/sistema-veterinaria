@@ -103,10 +103,10 @@ const ac = new Autocomplete(document.getElementById('myAutocomplete'), {data: da
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 {% for mascota in mascotas %}
-                {% if mascota.id_raza == raza.id %}
+                {% if mascota.id_raza.id == raza.id %}
                 <div class="modal-body">
                   <div class="card" style="width: 18rem;">
-                    <img src="../../{{mascota.url_imagen}}" class="card-img-top" alt="...">
+                    <img src="../../media/{{mascota.imagen}}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title text-capitalize">{{mascota.nombre_mascota}}</h5>
                       <h6 class="card-subtitle mb-2 text-body-secondary">{{mascota.edad_meses}} meses - {% if mascota.sexo %}Macho{% else %}Hembra{% endif %}</h6>
@@ -114,11 +114,7 @@ const ac = new Autocomplete(document.getElementById('myAutocomplete'), {data: da
                       <a href="#" class="btn btn-primary">Detalles mascota</a>
                     </div>
                   </div>
-                </div>
-                {% else %}
-                <div class="modal-body">
-                  <p>No hay mascotas registradas de esta raza</p>
-                </div>
+                </div>                
                 {% endif %}
                 {% endfor %}
               </div>

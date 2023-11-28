@@ -36,6 +36,27 @@ class FichaForm(forms.ModelForm):
         widget=forms.Select(attrs={'class':'form-select'}),
         label="Dueño"
     )
+
+    def clean_nombre_mascota(self):
+        nombre = self.cleaned_data.get('nombre_mascota')
+
+        if nombre and not nombre.isalpha() and ' ' not in nombre:
+            raise forms.ValidationError("El nombre de la mascota debe tener solo letras y espacios")
+        
+        return nombre
+
+    def clean_edad_meses(self):
+        edad = self.cleaned_data.get('edad_meses')
+
+        try:
+            edad = int(edad)
+        except ValueError:
+            raise forms.ValidationError("Edad debe ser un número entero")
+        
+        if edad < 0:
+            raise forms.ValidationError("Edad debe ser mayor que 0")
+        
+        return edad
     
     class Meta:
         model = FichaClinica
@@ -68,6 +89,22 @@ class AtencionForm(forms.ModelForm):
 class RazaForm(forms.ModelForm):
     nombre_especie = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese Especie', 'id': 'myAutocomplete'}))
     nombre_raza = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese Raza'}))
+
+    def clean_nombre_especie(self):
+        nombre = self.cleaned_data.get('nombre_especie')
+
+        if nombre and not nombre.isalpha() and ' ' not in nombre:
+            raise forms.ValidationError("El nombre de la especie debe tener solo letras y espacios")
+        
+        return nombre
+
+    def clean_nombre_raza(self):
+        nombre = self.cleaned_data.get('nombre_raza')
+
+        if nombre and not nombre.isalpha() and ' ' not in nombre:
+            raise forms.ValidationError("El nombre de la raza debe tener solo letras y espacios")
+        
+        return nombre
 
     class Meta:
         model = Raza
