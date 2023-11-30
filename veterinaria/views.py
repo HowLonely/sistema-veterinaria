@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from veterinaria import forms
 
 from veterinaria import models
@@ -54,7 +54,9 @@ def fichas(req):
         form = forms.FichaForm(req.POST, req.FILES)
         if form.is_valid():
             form.save()
-            return redirect(req.path)
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
     else:
         form = forms.FichaForm()
     return render(req, 'veterinaria/fichas_clinicas.html', {'form': form,'fichas': models.FichaClinica.objects.all(), 'razas': models.Raza.objects.all(), 'clientes': models.Cliente.objects.all()})
@@ -132,7 +134,9 @@ def razas(req):
         form = forms.RazaForm(req.POST)
         if form.is_valid():
             form.save()
-            return redirect(req.path)
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
     else:
         form = forms.RazaForm()
     return render(req, 'veterinaria/especies.html', { 'form': form, 'razas': models.Raza.objects.all(), 'mascotas': models.FichaClinica.objects.all() })

@@ -19,6 +19,34 @@
       });
   } );
 </script>
+
+<script>
+  $(function() {
+    $('#ficha_clinica_form').on('submit', function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: '{% url "fichas" %}',
+        type: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response) {
+          $('#nombre_mascota_errors').html('');
+          $('#num_chip_errors').html('');
+          $('#edad_meses_errors').html('');
+          $('#sexo_errors').html('');
+          $('#id_raza_errors').html('');
+          $('#id_cliente_errors').html('');
+          $('#imagen_errors').html('');
+          if (!response.success) {
+            for (const campo in response.errors){
+              $('#' + campo + '_errors').html(response.errors[campo]);
+            }
+          } else { window.location.assign("{%url 'razas'%}") }
+        }
+      });
+    });
+  });
+</script>
 {% endblock %}
 
 {% block fichas %}active" aria-current="page{% endblock %}
@@ -44,19 +72,19 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form method="POST" enctype="multipart/form-data">
+              <form method="POST" enctype="multipart/form-data" id="ficha_clinica_form">
                 {% csrf_token %}
                 <div class="input-group mb-3">
                   <span class="input-group-text">{{ form.nombre_mascota.label_tag }}</span>
                   {{ form.nombre_mascota }}
-                  {{ form.nombre_mascota.errors }}
+                  <div id="nombre_mascota_errors">{{ form.nombre_mascota.errors }}</div>
                 </div>
 
                 <div class="mb-3">
                   <div class="input-group mb-3">
                     <span class="input-group-text">{{ form.num_chip.label_tag }}</span>
                     {{ form.num_chip }}
-                    {{ form.num_chip.errors }}
+                    <div id="num_chip_errors">{{ form.num_chip.errors }}</div>
 
                   </div>
                   <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
@@ -66,7 +94,7 @@
                   <div class="input-group mb-3">
                     <span class="input-group-text">{{ form.edad_meses.label_tag }}</span>
                     {{ form.edad_meses }}
-                    {{ form.edad_meses.errors }}
+                    <div id="edad_meses_errors">{{ form.edad_meses.errors }}</div>
 
                   </div>
                   <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
@@ -76,7 +104,7 @@
                   <div class="input-group mb-3">
                     <span class="input-group-text">{{ form.sexo.label_tag }}</span>
                     {{ form.sexo }}
-                    {{ form.sexo.errors }}
+                    <div id="sexo_errors">{{ form.sexo.errors }}</div>
                   </div>
                   <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
@@ -85,7 +113,7 @@
                   <div class="input-group mb-3">
                     <span class="input-group-text">{{ form.id_raza.label_tag }}</span>
                     {{ form.id_raza }}
-                    {{ form.id_raza.errors }}
+                    <div id="id_raza_errors">{{ form.id_raza.errors }}</div>
                   </div>
                   <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
@@ -93,7 +121,7 @@
                   <div class="input-group mb-3">
                     <span class="input-group-text">{{ form.id_cliente.label_tag }}</span>
                     {{ form.id_cliente }}
-                    {{ form.id_cliente.errors }}
+                    <div id="id_cliente_errors">{{ form.id_cliente.errors }}</div>
                     
                   </div>
                   <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
@@ -102,7 +130,7 @@
                   <div class="input-group mb-3">
                     <span class="input-group-text">{{ form.imagen.label_tag }}</span>
                     {{ form.imagen }}
-                    {{ form.imagen.errors }}
+                    <div id="imagen_errors">{{ form.imagen.errors }}</div>
       
                   </div>
                   <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->

@@ -17,6 +17,29 @@
 console.log(datasrc);
 const ac = new Autocomplete(document.getElementById('myAutocomplete'), {data: datasrc});
 </script>
+
+<script>
+  $(function() {
+    $('#raza-form').on('submit', function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: '{% url "razas" %}',
+        type: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response) {
+          $('#nombre_especie_errors').html('');
+          $('#nombre_raza_errors').html('');
+          if (!response.success) {
+            for (const campo in response.errors){
+              $('#' + campo + '_errors').html(response.errors[campo]);
+            }
+          } else { window.location.assign("{%url 'razas'%}") }
+        }
+      });
+    });
+  });
+</script>
 {% endblock %}
 
 {% block razas %}active" aria-current="page{% endblock %}
@@ -42,18 +65,18 @@ const ac = new Autocomplete(document.getElementById('myAutocomplete'), {data: da
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form method="POST">
+            <form method="POST" id="raza-form">
               {% csrf_token %}
               <div class="input-group mb-3">
                 <span class="input-group-text">{{ form.nombre_especie.label_tag }}</span>
                 {{ form.nombre_especie }}
-                {{ form.nombre_especie.errors }}
+                <div id="nombre_especie_errors">{{ form.nombre_especie.errors }}</div>
               </div>
               <div class="mb-3">
                 <div class="input-group mb-3">
                   <span class="input-group-text">{{ form.nombre_raza.label_tag }}</span>
                   {{ form.nombre_raza }}
-                  {{ form.nombre_raza.errors }}
+                  <div id="nombre_raza_errors">{{ form.nombre_raza.errors }}</div>
                 </div>
                 <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
               </div>                  
