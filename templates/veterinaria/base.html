@@ -24,17 +24,41 @@
                   </li>
                   <!-- active" aria-current="page -->
                   <li class="nav-item">
-                    <a class="nav-link {% block fichas %}{% endblock %}" href="{% url 'fichas' %}">Fichas</a>
+                    <a class="nav-link {% block fichas %}{% endblock %} {% if not perms.veterinaria.view_fichaclinica %}
+                    text-decoration-line-through fw-lighter
+                    {% endif %}" href="{% url 'fichas' %}">Fichas</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link {% block atenciones %}{% endblock %}" href="{% url 'atenciones' %}">Atenciones</a>
+                    <a class="nav-link {% block atenciones %}{% endblock %} {% if not perms.veterinaria.view_atencion %}
+                    text-decoration-line-through fw-lighter
+                    {% endif %}" href="{% url 'atenciones' %}">Atenciones</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link {% block clientes %}{% endblock %}" href="{% url 'clientes' %}">Clientes</a>
+                    <a class="nav-link {% block clientes %}{% endblock %} {% if not perms.veterinaria.view_cliente %}
+                    text-decoration-line-through fw-lighter
+                    {% endif %}" href="{% url 'clientes' %}">Clientes</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link {% block razas %}{% endblock %}" href="{% url 'razas' %}">Razas</a>
+                    <a class="nav-link {% block razas %}{% endblock %} {% if not perms.veterinaria.view_raza %}
+                    text-decoration-line-through fw-lighter
+                    {% endif %}" href="{% url 'razas' %}">Razas</a>
                   </li>
+                  <hr class="border border-primary border-2 opacity-75">
+                  {% if user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Bienvenid@ {{ user.first_name }}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Usuario: {{ user.username }}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+                  </li>
+                  {% endif%}
                 </ul>
               </div>
             </div>

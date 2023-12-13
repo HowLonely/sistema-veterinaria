@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from veterinaria import views
 
 urlpatterns = [
@@ -24,4 +24,7 @@ urlpatterns = [
     path('razas/', views.razas, name='razas'),
     path('eliminar_raza/<int:raza_id>/', views.eliminar_raza, name='eliminar_raza'),
     path('modificar_raza/<int:raza_id>/', views.modificar_raza, name='modificar_raza'),
+    path('raza/<int:raza_id>/', views.raza, name='raza'),
+
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

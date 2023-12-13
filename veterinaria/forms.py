@@ -11,6 +11,22 @@ class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = '__all__'
+    
+    def clean_nombres(self):
+        nombre = self.cleaned_data.get('nombres')
+
+        if nombre and not nombre.isalpha() and ' ' not in nombre:
+            raise forms.ValidationError("El nombre debe tener solo letras y espacios")
+        
+        return nombres
+
+    def clean_apellidos(self):
+        nombre = self.cleaned_data.get('apellidos')
+
+        if nombre and not nombre.isalpha() and ' ' not in nombre:
+            raise forms.ValidationError("El nombre debe tener solo letras y espacios")
+        
+        return apellidos
 
 class FichaForm(forms.ModelForm):
 

@@ -12,9 +12,10 @@
 <script>$(document).ready( function () {$('#razasTable').DataTable();} );</script>
 <script>var datasrc = [];
 {% for raza in razas %}
-  datasrc.push({label: '{{ raza.nombre_especie }}', value: '{{ raza.nombre_especie }}'});
+  if (!datasrc.some(e => e.label === '{{ raza.nombre_especie }}')) {
+    datasrc.push({label: '{{ raza.nombre_especie }}', value: '{{ raza.nombre_especie }}'});
+  }
 {% endfor %}
-console.log(datasrc);
 const ac = new Autocomplete(document.getElementById('myAutocomplete'), {data: datasrc});
 </script>
 
@@ -38,6 +39,28 @@ const ac = new Autocomplete(document.getElementById('myAutocomplete'), {data: da
         }
       });
     });
+  });
+</script>
+
+<script>
+  $('a[id^="btn_modificar_raza"]').click(function(e) {
+    e.preventDefault();
+    var raza_id = $(this).attr('id').slice(18, $(this).attr('id').length);
+    $('#form-raza_id').html(raza_id);
+    $.ajax({
+        url: "/raza/" + raza_id,
+        data: { 
+            id: raza_id
+        },
+        success: function(result) {
+            $('#modal-body_form_modificar').html(result);
+            console.log(result);
+        },
+        error: function(result) {
+            console.log(result);
+        }
+    });
+    $('#modificar_raza_form').attr("action", "/modificar_raza/" + raza_id + "/");
   });
 </script>
 {% endblock %}
@@ -111,7 +134,7 @@ const ac = new Autocomplete(document.getElementById('myAutocomplete'), {data: da
                   ⋮
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#form_modificar_raza{{raza.id}}">Editar Datos Raza</a></li>
+                  <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#form_modificar_raza" id="btn_modificar_raza{{raza.id}}">Editar Datos Raza</a></li>
                   <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#raza{{raza.id}}">Ver Mascotas de esta raza</a></li>
                   <li><a class="dropdown-item" type="button" href="{% url 'eliminar_raza' raza.id %}">Eliminar Raza</a></li>
                 </ul>
@@ -143,41 +166,43 @@ const ac = new Autocomplete(document.getElementById('myAutocomplete'), {data: da
               </div>
             </div>
           </div>
-          <div class="modal fade" id="form_modificar_raza{{raza.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="form_modificar_razaLabel{{raza.id}}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="form_modificar_razaLabel{{raza.id}}">Modificar raza {{raza.id}}</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form method="POST" action="{% url 'modificar_raza' raza.id %}">
-                    {% csrf_token %}
-                    <div class="input-group mb-3">
-                      <span class="input-group-text">{{ form.nombre_especie.label_tag }}</span>
-                      {{ form.nombre_especie }}
-                      {{ form.nombre_especie.errors }}
-                    </div>
-                    <div class="mb-3">
-                      <div class="input-group mb-3">
-                        <span class="input-group-text">{{ form.nombre_raza.label_tag }}</span>
-                        {{ form.nombre_raza }}
-                        {{ form.nombre_raza.errors }}
-                      </div>
-                      <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
-                    </div>                  
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                  <button type="submit" class="btn btn-primary">Modificar raza</button>
-                </div>
-              </form>
-              </div>
-            </div>
-          </div>
           {% endfor %}
       </tbody>
     </table>
+    <div class="modal fade" id="form_modificar_raza" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="form_modificar_razaLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="form_modificar_razaLabel">Modificar raza <span id="form-raza_id"></span></h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" id="modificar_raza_form" action="/modificar_raza/">
+              {% csrf_token %}
+              <div id="modal-body_form_modificar">
+              <div class="input-group mb-3">
+                <span class="input-group-text">{{ formEdit.nombre_especie.label_tag }}</span>
+                {{ formEdit.nombre_especie }}
+                {{ formEdit.nombre_especie.errors }}
+              </div>
+              <div class="mb-3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text">{{ formEdit.nombre_raza.label_tag }}</span>
+                  {{ formEdit.nombre_raza }}
+                  {{ formEdit.nombre_raza.errors }}
+                </div>
+                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+              </div>
+              </div>                  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Modificar raza</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

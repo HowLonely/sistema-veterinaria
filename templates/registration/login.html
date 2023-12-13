@@ -1,0 +1,17 @@
+{% extends "veterinaria/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+<div class="col-6 mx-auto">
+<form method="POST">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <div>
+        <input type="reset" class="btn" value="Cancelar">&nbsp;
+        <input type="submit" class="btn" value="Ingresar">
+    </div>
+</form>
+</div>
+
+{% endblock %}
