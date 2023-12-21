@@ -2,23 +2,23 @@
 
 ## Sprint 1 (Módulo Ficha Clínica):
 
-- [ ] Como Asistente, necesito registrar los datos de una mascota en una ficha clínica junto a su dueño para mantener un registro ordenado y tener acceso posteriormente a la información relacionada.
+- [x] Como Asistente, necesito registrar los datos de una mascota en una ficha clínica junto a su dueño para mantener un registro ordenado y tener acceso posteriormente a la información relacionada.
 
 Tiempo(Esfuerzo): 4+2+1 = 7 Horas
 
-- [ ] Como Asistente, necesito mantener registros de los dueños junto a sus mascotas para facilitar el acceso a la información al realizar operaciones específicas.
+- [x] Como Asistente, necesito mantener registros de los dueños junto a sus mascotas para facilitar el acceso a la información al realizar operaciones específicas.
 
 Tiempo(Esfuerzo): 8+3.5+1.5 = 13 Horas
 
-- [ ] Como Veterinario, necesito tener acceso a los datos detallados de una mascota para tener más contexto al realizar el diagnóstico.
+- [x] Como Veterinario, necesito tener acceso a los datos detallados de una mascota para tener más contexto al realizar el diagnóstico.
 
 Tiempo(Esfuerzo): 3+2+2+4 = 11 Horas
 
-- [ ] Como Asistente, necesito hacer CRUD a los datos de los dueños de una o más mascotas para mantener actualizado el sistema con respecto a los dueños de las mascotas.
+- [x] Como Asistente, necesito hacer CRUD a los datos de los dueños de una o más mascotas para mantener actualizado el sistema con respecto a los dueños de las mascotas.
 
 Tiempo(Esfuerzo): 2.6+4+3+1 = 10.6 Horas
 
-- [ ] Como Asistente, necesito hacer CRUD a todas las razas disponibles en el sistema para poder asociarlas a la mascota.
+- [x] Como Asistente, necesito hacer CRUD a todas las razas disponibles en el sistema para poder asociarlas a la mascota.
 
 Tiempo(Esfuerzo): 3+2+5+1+1 = 12 Horas
 
@@ -26,45 +26,45 @@ Tiempo(Esfuerzo): 3+2+5+1+1 = 12 Horas
 
 ## Sprint 2 (Módulo Registro y Seguimiento de Atenciones):
 
-- [ ] Como Veterinario, necesito revisar las atenciones pasadas de una mascota para dar seguimiento del progreso de una mascota.
+- [x] Como Veterinario, necesito revisar las atenciones pasadas de una mascota para dar seguimiento del progreso de una mascota.
 
-  - [ ] Crear la interfaz que tenga la lista de atenciones de una mascota en específico (Tiempo: 3 Horas)
-  - [ ] Conectar con la base de datos y traer los datos de las atenciones (Tiempo: 2.6 Horas)
+  - [x] Crear la interfaz que tenga la lista de atenciones de una mascota en específico (Tiempo: 3 Horas)
+  - [x] Conectar con la base de datos y traer los datos de las atenciones (Tiempo: 2.6 Horas)
 
   **Total: 5.6 Horas**
 
-- [ ] Como Veterinario, necesito mantener un registro detallado de la consulta para mantener un seguimiento detallado de cada caso.
+- [x] Como Veterinario, necesito mantener un registro detallado de la consulta para mantener un seguimiento detallado de cada caso.
 
-  - [ ] Crear el front-end que tenga la lista de atenciones de un cliente en específico (Tiempo: 3.5 Horas)
-  - [ ] Agregar un filtro al front-end para buscar una atención en específico (Tiempo: 3 Horas)
-  - [ ] Crear el front-end de los detalles de la atención (Tiempo: 4 Horas)
+  - [x] Crear el front-end que tenga la lista de atenciones de un cliente en específico (Tiempo: 3.5 Horas)
+  - [x] Agregar un filtro al front-end para buscar una atención en específico (Tiempo: 3 Horas)
+  - [x] Crear el front-end de los detalles de la atención (Tiempo: 4 Horas)
 
   **Total: 10.5 Horas**
 
-- [ ] Como Asistente, necesito modificar las horas de atención para corregir errores de digitación u cambios posteriores al registro en el sistema.
+- [x] Como Asistente, necesito modificar las horas de atención para corregir errores de digitación u cambios posteriores al registro en el sistema.
 
-  - [ ] Crear la interfaz que visualice las horas de atención agendadas junto con el veterinario y una opción para cambiar la hora (Tiempo: 3.6 Horas)
-  - [ ] Conectar con la base de datos para traer las horas específicas de una mascota (Tiempo: 2 Horas)
-  - [ ] Guardar los cambios de la hora de atención modificada en la base de datos (Tiempo: 1 Hora)
+  - [x] Crear la interfaz que visualice las horas de atención agendadas junto con el veterinario y una opción para cambiar la hora (Tiempo: 3.6 Horas)
+  - [x] Conectar con la base de datos para traer las horas específicas de una mascota (Tiempo: 2 Horas)
+  - [x] Guardar los cambios de la hora de atención modificada en la base de datos (Tiempo: 1 Hora)
 
   **Total: 6.6 Horas**
 
 - [ ] Como Administrador, necesito crear perfiles dentro del sistema para poder dar distintos tipos de accesos al sistema.
 
-  - [ ] Crear la interfaz en el que se visualice el formulario de administrador para agregar un nuevo perfil (Tiempo: 3 Horas)
+  - [x] Crear la interfaz en el que se visualice el formulario de administrador para agregar un nuevo perfil (Tiempo: 3 Horas)
   - [ ] Crear la lógica para generar una contraseña temporal segura (Tiempo: 2 Horas)
-  - [ ] Conectar con la base de datos para almacenar el nuevo perfil (Tiempo: 1 Hora)
+  - [x] Conectar con la base de datos para almacenar el nuevo perfil (Tiempo: 1 Hora)
   - [ ] Crear la lógica para enviar la contraseña temporal por correo (Tiempo: 5 Horas)
-  - [ ] Realizar las validaciones de los datos ingresados en el formulario (Tiempo: 3 Horas)
+  - [x] Realizar las validaciones de los datos ingresados en el formulario (Tiempo: 3 Horas)
 
   **Total: 14 Horas**
 
 - [ ] Como Administrador, necesito restablecer contraseñas de cuentas dentro del sistema para poder dar acceso nuevamente a una cuenta en caso de pérdida u error de acceso.
 
-  - [ ] Crear la interfaz de usuario del módulo de administrador (Tiempo: 3 Horas)
-  - [ ] Conectar con la base de datos para traer los datos del perfil del usuario (Tiempo: 2 Horas)
+  - [x] Crear la interfaz de usuario del módulo de administrador (Tiempo: 3 Horas)
+  - [x] Conectar con la base de datos para traer los datos del perfil del usuario (Tiempo: 2 Horas)
   - [ ] Crear la lógica para cambiar la contraseña a una temporal segura (Tiempo: 3 Horas)
-  - [ ] Guardar los cambios en la base de datos (Tiempo: 1 Hora)
+  - [x] Guardar los cambios en la base de datos (Tiempo: 1 Hora)
 
   **Total: 9 Horas**
 
