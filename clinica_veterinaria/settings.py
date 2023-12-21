@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'veterinaria',
     'crispy_forms',
     'crispy_bootstrap5',
+    'veterinariaApi',
+    'rest_framework',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
