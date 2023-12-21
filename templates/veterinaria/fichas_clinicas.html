@@ -27,8 +27,10 @@
       $.ajax({
         url: '{% url "fichas" %}',
         type: 'POST',
-        data: $(this).serialize(),
+        data: new FormData(this),
         dataType: 'json',
+        processData: false,  // Evita que jQuery procese la data automáticamente
+        contentType: false,
         success: function(response) {
           $('#nombre_mascota_errors').html('');
           $('#num_chip_errors').html('');
