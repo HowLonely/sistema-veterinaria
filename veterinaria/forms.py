@@ -13,17 +13,17 @@ class ClienteForm(forms.ModelForm):
         fields = '__all__'
     
     def clean_nombres(self):
-        nombre = self.cleaned_data.get('nombres')
+        nombres = self.cleaned_data.get('nombres')
 
-        if nombre and not nombre.isalpha() and ' ' not in nombre:
+        if nombres and not nombres.isalpha() and ' ' not in nombres:
             raise forms.ValidationError("El nombre debe tener solo letras y espacios")
         
         return nombres
 
     def clean_apellidos(self):
-        nombre = self.cleaned_data.get('apellidos')
+        apellidos = self.cleaned_data.get('apellidos')
 
-        if nombre and not nombre.isalpha() and ' ' not in nombre:
+        if apellidos and not apellidos.isalpha() and ' ' not in apellidos:
             raise forms.ValidationError("El nombre debe tener solo letras y espacios")
         
         return apellidos
