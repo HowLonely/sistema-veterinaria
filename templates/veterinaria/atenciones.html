@@ -64,9 +64,9 @@
                 </div>
               </div>
                 <div class="mb-3">
-                  {{ form.id_ficha_clinica.label_tag  }}
-                  {{ form.id_ficha_clinica }}
-                  {{ form.id_ficha_clinica.errors }}
+                  {{ form.id_mascota.label_tag  }}
+                  {{ form.id_mascota }}
+                  {{ form.id_mascota.errors }}
                   <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
                 <div class="mb-3">
@@ -130,7 +130,7 @@
                 Inicio: {{atencion.hora_ingreso}}<br />
                 Termino: {{atencion.hora_termino}}
               </td>
-              <td class="text-capitalize">{{atencion.id_ficha_clinica.id_mascota.nombres}}</td>
+              <td class="text-capitalize">{{atencion.id_mascota.nombre_mascota}}</td>
               <td>
                 <div class="btn-group">
                   <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="dropdown" aria-expanded="false">

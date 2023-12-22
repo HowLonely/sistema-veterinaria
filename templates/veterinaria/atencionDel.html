@@ -9,7 +9,7 @@
   <div class="container m-0 p-0">
     <h3>Confirmar Eliminación de Atención</h3>
     <div class="alert alert-danger h5">
-      ¿Estás seguro que deseas eliminar la atención? (Fecha: {{atenciones.fecha_atencion }} Hora: {{ atenciones.hora_ingreso }} Mascota: {{ atenciones.id_ficha_clinica.id_mascota.nombres }} Veterinario: {{ atenciones.id_veterinario.nombres }} {{atenciones.id_veterinario.apellidos }})
+      ¿Estás seguro que deseas eliminar la atención? (Fecha: {{atenciones.fecha_atencion }} Hora: {{ atenciones.hora_ingreso }} Mascota: {{ atenciones.id_mascota.nombre_mascota }} Veterinario: {{ atenciones.id_veterinario.nombres }} {{atenciones.id_veterinario.apellidos }})
     </div>
     <form method="POST">
       {% csrf_token %}

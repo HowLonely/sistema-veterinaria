@@ -85,7 +85,7 @@ class AtencionForm(forms.ModelForm):
     tratamiento = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Ingrese Tratamiento'}))
     observaciones = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Ingrese Observaciones'}))
     fecha_atencion = forms.DateField(widget=forms.DateInput(attrs={'class':'form-control','placeholder': 'Día/Mes/Año', 'type': 'date'}))
-    id_ficha_clinica = forms.ModelChoiceField(
+    id_mascota = forms.ModelChoiceField(
         queryset=FichaClinica.objects.all(),
         empty_label="Selecciona ficha clínica",
         widget=forms.Select(attrs={'class':'form-select'}),

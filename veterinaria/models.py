@@ -65,6 +65,7 @@ class Atencion(models.Model):
     observaciones = models.CharField(max_length=245, null=True)
     fecha_atencion = models.DateField(null=True)
     id_veterinario = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
+    id_mascota = models.ForeignKey(FichaClinica, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f"Atencion {self.id_atencion}"
