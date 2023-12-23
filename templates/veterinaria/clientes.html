@@ -9,7 +9,6 @@
 <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
 <script src="{% static 'js/dataTables.bootstrap5.min.js' %}"></script>
 <script src="https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"></script>
-
 <script>
   $(document).ready( function () {
       $('#clientesTable').DataTable({
@@ -18,6 +17,33 @@
           }
       });
   } );
+</script>
+
+<script>
+  $(function() {
+    $('#cliente-form').on('submit', function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: '{% url "clientes" %}',
+        type: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response) {
+          $('#rut_errors').html('');
+          $('#nombres_errors').html('');
+          $('#apellidoss_errors').html('');
+          $('#fono_1_errors').html('');
+          $('#fono_2_errors').html('');
+          $('#email_errors').html('');
+          if (!response.success) {
+            for (const campo in response.errors){
+              $('#' + campo + '_errors').html(response.errors[campo]);
+            }
+          } else { window.location.assign("{%url 'clientes'%}") }
+        }
+      });
+    });
+  });
 </script>
 {% endblock %}
 
@@ -44,21 +70,19 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form method="POST">
+            <form method="POST" id="cliente-form">
               {% csrf_token %}
               <div class="input-group mb-3">
                 <span class="input-group-text">{{ form.rut.label_tag }}</span>
                 {{ form.rut }}
-                {{ form.rut.errors }}
-
+                <div id="rut_errors">{{ form.rut.errors }}</div>
               </div>
 
               <div class="mb-3">
                 <div class="input-group mb-3">
                   <span class="input-group-text">{{ form.nombres.label_tag }}</span>
                   {{ form.nombres }}
-                  {{ form.nombres.errors }}
-
+                  <div id="nombres_errors">{{ form.nombres.errors }}</div>
                 </div>
                 <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
               </div>
@@ -67,8 +91,7 @@
                 <div class="input-group mb-3">
                   <span class="input-group-text">{{ form.apellidos.label_tag }}</span>
                   {{ form.apellidos }}
-                  {{ form.apellidos.errors }}
-
+                  <div id="apellidos_errors">{{ form.apellidos.errors }}</div>
                 </div>
                 <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
               </div>
@@ -77,10 +100,10 @@
                 <div class="input-group mb-3">
                   <span class="input-group-text">{{ form.fono_1.label_tag }}</span>
                   {{ form.fono_1 }}
-                  {{ form.fono_1.errors }}
+                  <div id="fono_1_errors">{{ form.fono_1.errors }}</div>
                   <span class="input-group-text">{{ form.fono_2.label_tag }}</span>
                   {{ form.fono_2 }}
-                  {{ form.fono_2.errors }}
+                  <div id="fono_2_errors">{{ form.fono_2.errors }}</div>
                 </div>
                 <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
               </div>
@@ -89,7 +112,7 @@
                 <div class="input-group mb-3">
                   <span class="input-group-text">{{ form.email.label_tag }}</span>
                   {{ form.email }}
-                  {{ form.email.errors }}
+                  <div id="email_errors">{{ form.email.errors }}</div>
                 </div>
                 <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
               </div>
@@ -147,9 +170,9 @@
                   <h1 class="modal-title fs-5" id="ModalLabel{{cliente.rut}}">Mascotas de {{cliente.nombres}}</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body">
                 {% for mascota in mascotas %}
                 {% if mascota.id_cliente.rut == cliente.rut %}
-                <div class="modal-body">
                   <div class="card" style="width: 18rem;">
                     <img src="{{mascota.imagen.url}}" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -159,13 +182,9 @@
                       <a href="#" class="btn btn-primary">Detalles mascota</a>
                     </div>
                   </div>
-                </div>
-                {% else %}
-                <div class="modal-body">
-                  <p>El cliente no tiene mascotas registradas.</p>
-                </div>
                 {% endif %}
                 {% endfor %}
+                </div>
               </div>
             </div>
           </div>                  

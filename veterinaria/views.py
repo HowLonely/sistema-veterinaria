@@ -17,10 +17,11 @@ def clientes(req):
         form = forms.ClienteForm(req.POST)
         if form.is_valid():
             form.save()
-            return redirect(req.path)
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
     else:
-        form = forms.ClienteForm
-    
+        form = forms.ClienteForm()
     return render(req, 'veterinaria/clientes.html', {'form': form, 'clientes': models.Cliente.objects.all(), 'mascotas': models.FichaClinica.objects.all(), 'razas': models.Raza.objects.all()})
 
 @permission_required("veterinaria.view_cliente", raise_exception=True)
@@ -41,7 +42,7 @@ def editar_cliente(req, cliente_id):
             return redirect('/clientes/')
         else:
             form = forms.ClienteForm(instance=cliente)
-        return render(req, 'veterinaria/cliente.html', {'form': form})
+        return render(req, 'veterinaria/cliente.html', {'form': form, 'cliente': cliente})
 
 @permission_required("veterinaria.delete_cliente", raise_exception=True)
 def eliminar_cliente(req, cliente_id):
