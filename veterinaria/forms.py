@@ -81,7 +81,7 @@ class FichaForm(forms.ModelForm):
 class AtencionForm(forms.ModelForm):
     hora_ingreso = forms.TimeField(widget=forms.TimeInput(attrs={'class':'form-control','type': 'time'}))
     hora_termino = forms.TimeField(widget=forms.TimeInput(attrs={'class':'form-control','type': 'time'}))
-    diagnostico = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Ingrese Diagnostico'}))
+    diagnostico = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control','placeholder': 'Ingrese Diagnostico'}))
     tratamiento = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Ingrese Tratamiento'}))
     observaciones = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Ingrese Observaciones'}))
     fecha_atencion = forms.DateField(widget=forms.DateInput(attrs={'class':'form-control','placeholder': 'Día/Mes/Año', 'type': 'date'}))

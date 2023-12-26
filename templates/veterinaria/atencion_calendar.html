@@ -49,14 +49,16 @@
 
     var calendar = new FullCalendar.Calendar(calendarEl,  {
       themeSystem: 'bootstrap5',
-      height: 700,
+      height: 750,
       initialView: 'dayGridMonth',
       selectable: true,
       allDaySlot: false,
-      defaultTimedEventDuration: '00:45:00',
-      slotDuration: '00:45:00',
-      slotLabelInterval: 45,  
-      slotMinTime: '06:00:00',
+      defaultTimedEventDuration: '00:15:00',
+      slotDuration: '00:15:00',
+      slotLabelInterval: 30,  
+      slotMinTime: '09:00:00',
+      slotMaxTime: '18:00:00',
+      slotMinWidth: 300,
       locale: 'es',
       headerToolbar: {
         left: 'prev,next today',
@@ -81,9 +83,9 @@
         }
       },
       businessHours: {
-        dow: [1, 2, 3, 4, 5], // Lunes a Viernes
-        startTime: '08:00', // Hora de inicio
-        endTime: '20:00' // Hora de término
+        daysOfWeek: [1, 2, 3, 4, 5, 6], // Lunes a Sábado
+        startTime: '09:00', // Hora de inicio
+        endTime: '18:00' // Hora de término
       },
       dateClick: function(info) {
         // Redirecciona a la grid del dia seleccionado si esta en la grid de mes
@@ -165,7 +167,7 @@
 
       <!-- Modal -->
       <div class="modal fade" id="form_agregar_atencion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="form_agregar_atencionLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="form_agregar_atencionLabel">Crear reserva</h1>
