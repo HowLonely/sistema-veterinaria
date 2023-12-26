@@ -1,7 +1,7 @@
 {% extends "veterinaria/base.html" %}
 {% load static %}
 
-{% block titulo %}Catálogo atenciones{% endblock %}
+{% block titulo %}Reservar hora{% endblock %}
 
 {% block scripts %}
 <script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
@@ -14,17 +14,40 @@
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var allAtenciones = [
-      {% for atencion in atenciones %}
-      {
-        title: '{{ atencion.id_veterinario.nombres }} - {{ atencion.id_mascota.nombre_mascota }}',
+      {% for atencion in atenciones_pasadas %}
+      { 
+        title: '{{ atencion.id_veterinario.first_name }} - {{ atencion.id_mascota.nombre_mascota }}',
         start: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_ingreso|time:"H:i:s" }}',
         end: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_termino|time:"H:i:s" }}',
         idVeterinario: {{ atencion.id_veterinario.id }},
+        backgroundColor: 'red',
+        url: '{% url "verAtencion" atencion_id=atencion.id %}',
       },
       {% endfor %}
+      {% for atencion in atenciones_presentes %}
+        {
+          title: '{{ atencion.id_veterinario.first_name }} - {{ atencion.id_mascota.nombre_mascota }}',
+          start: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_ingreso|time:"H:i:s" }}',
+          end: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_termino|time:"H:i:s" }}',
+          idVeterinario: {{ atencion.id_veterinario.id }},
+          backgroundColor: 'green',
+          url: '{% url "verAtencion" atencion_id=atencion.id %}',
+        },
+      {% endfor %}
+      {% for atencion in atenciones_futuras %}
+        {
+          title: '{{ atencion.id_veterinario.first_name }} - {{ atencion.id_mascota.nombre_mascota }}',
+          start: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_ingreso|time:"H:i:s" }}',
+          end: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_termino|time:"H:i:s" }}',
+          idVeterinario: {{ atencion.id_veterinario.id }},
+          backgroundColor: 'blue',
+          url: '{% url "verAtencion" atencion_id=atencion.id %}',
+        },
+      {% endfor %}
+  
     ];
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    var calendar = new FullCalendar.Calendar(calendarEl,  {
       themeSystem: 'bootstrap5',
       height: 700,
       initialView: 'dayGridMonth',
@@ -60,25 +83,27 @@
       businessHours: {
         dow: [1, 2, 3, 4, 5], // Lunes a Viernes
         startTime: '08:00', // Hora de inicio
-        endTime: '17:00' // Hora de término
+        endTime: '20:00' // Hora de término
       },
       dateClick: function(info) {
+        // Redirecciona a la grid del dia seleccionado si esta en la grid de mes
         if (info.view && info.view.type === 'dayGridMonth' || info.view.type === 'customMonth') {
           var selectedDate = info.dateStr;
           calendar.changeView('timeGridDay', selectedDate);
         }
       },
+      //Solo deja seleccionar horas dentro del businessHours
       selectConstraint: "businessHours",
+      //no deja seleccionar fechas pasadas
+      selectAllow: function(selectInfo) {
+        // Obtiene la fecha actual
+        var currentDate = new Date();
+        //console.log(currentDate);
+        // Compara la fecha seleccionada con la fecha actual
+        return selectInfo.start >= currentDate;
+      },
       select: function(start, end, jsEvent, view) {
-        if (start.view && start.view.type === 'dayGridMonth' || start.view.type === 'customMonth') {
-          // Redirecciona a la grid del dia seleccionado si esta en la grid de mes
-          var selectedDate = start.startStr;
-          calendar.changeView('timeGridDay', selectedDate);
-        } else {
-          //console.log("Rango seleccionado: ", start);
-          //console.log("Fecha para el form: ", start.startStr);
-          openModalWithDate(start.start, start.start);
-        }
+        openModalWithDate(start.start, start.end);
       },
       events: allAtenciones,
     });
@@ -86,8 +111,8 @@
     calendar.render();
     
     function openModalWithDate(startDate, endDate) {
-      console.log(startDate.toISOString());
-      console.log(endDate);
+      //console.log(startDate);
+      //console.log(endDate);
       formatedDate = startDate.toISOString().split('T')[0];
       formatedStartDate = new Date(startDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       formatedEndDate = new Date(endDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })

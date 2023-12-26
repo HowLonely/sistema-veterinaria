@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
-from django.core.serializers import serialize
 from django.contrib.auth.decorators import permission_required
+
+from django.utils import timezone
+import pytz
+
 from veterinaria import forms
 
 from veterinaria import models
@@ -183,6 +186,7 @@ def modificar_raza(req, raza_id):
     return render(req, 'veterinaria/especies.html', { 'form': form, 'razas': models.Raza.objects.all(), 'mascotas': models.FichaClinica.objects.all() })
 
 def reservas(req):
+    now = timezone.now()
     if req.method == 'POST':
         form = forms.AtencionForm(req.POST)
         if form.is_valid():
@@ -190,4 +194,21 @@ def reservas(req):
             return redirect(req.path)
     else:
         form = forms.AtencionForm()
-    return render(req, 'veterinaria/atencion_calendar.html', {'form': form, 'atenciones': models.Atencion.objects.all(), 'veterinarios': models.CustomUser.objects.filter(id_tipo_usuario = 3) })
+
+    atenciones = models.Atencion.objects.all()
+
+    atenciones_pasadas = []
+    atenciones_presentes = []
+    atenciones_futuras = []
+
+    for atencion in atenciones:
+        if atencion.fecha_atencion < now.date():
+            atenciones_pasadas.append(atencion)
+        elif atencion.fecha_atencion == now.date() and atencion.hora_ingreso < now.time() and atencion.hora_termino < now.time():
+            atenciones_pasadas.append(atencion)
+        elif atencion.fecha_atencion == now.date() and atencion.hora_ingreso <= now.time() and atencion.hora_termino > now.time():
+            atenciones_presentes.append(atencion)
+        else:
+            atenciones_futuras.append(atencion)
+
+    return render(req, 'veterinaria/atencion_calendar.html', {'form': form, 'atenciones_pasadas': atenciones_pasadas, 'atenciones_presentes': atenciones_presentes, 'atenciones_futuras': atenciones_futuras, 'veterinarios': models.CustomUser.objects.filter(id_tipo_usuario=3), 'now': now.time()})
