@@ -81,9 +81,9 @@ class FichaForm(forms.ModelForm):
 class AtencionForm(forms.ModelForm):
     hora_ingreso = forms.TimeField(widget=forms.TimeInput(attrs={'class':'form-control','type': 'time'}))
     hora_termino = forms.TimeField(widget=forms.TimeInput(attrs={'class':'form-control','type': 'time'}))
-    diagnostico = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control','placeholder': 'Ingrese Diagnostico'}))
-    tratamiento = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Ingrese Tratamiento'}))
-    observaciones = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Ingrese Observaciones'}))
+    diagnostico = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control','placeholder': 'Ingrese Diagnostico', 'rows': '2'}))
+    tratamiento = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control','placeholder': 'Ingrese Tratamiento', 'rows': '2'}))
+    observaciones = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control','placeholder': 'Ingrese Observaciones', 'rows': '2'}))
     fecha_atencion = forms.DateField(widget=forms.DateInput(attrs={'class':'form-control','placeholder': 'Día/Mes/Año', 'type': 'date'}))
     id_mascota = forms.ModelChoiceField(
         queryset=FichaClinica.objects.all(),
