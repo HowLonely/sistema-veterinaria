@@ -70,14 +70,14 @@
       },
       selectConstraint: "businessHours",
       select: function(start, end, jsEvent, view) {
-        // Redirecciona a la grid del dia seleccionado
         if (start.view && start.view.type === 'dayGridMonth' || start.view.type === 'customMonth') {
+          // Redirecciona a la grid del dia seleccionado si esta en la grid de mes
           var selectedDate = start.startStr;
           calendar.changeView('timeGridDay', selectedDate);
         } else {
-          console.log("Rango seleccionado: ", start);
-          console.log("Fecha para el form: ", start.startStr);
-          console.log("Hora inicial para el form: ", (new Date (start.startStr)).getHours(), (new Date (start.startStr)).getMinutes() );
+          //console.log("Rango seleccionado: ", start);
+          //console.log("Fecha para el form: ", start.startStr);
+          openModalWithDate(start.start, start.start);
         }
       },
       events: allAtenciones,
@@ -85,10 +85,19 @@
 
     calendar.render();
     
-    function openModalWithDate(date, initialHr, endHr) {
-      formatedDate = date.toISOString().split('T')[0];
+    function openModalWithDate(startDate, endDate) {
+      console.log(startDate.toISOString());
+      console.log(endDate);
+      formatedDate = startDate.toISOString().split('T')[0];
+      formatedStartDate = new Date(startDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      formatedEndDate = new Date(endDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+
+
       $('#form_agregar_atencion').modal('show');
       $('#id_fecha_atencion').val(formatedDate);  
+      $('#id_hora_ingreso').val(formatedStartDate);
+      $('#id_hora_termino').val(formatedEndDate);
+      $('#id_id_veterinario').val(document.getElementById('veterinarioSelect').value);
     }
 
     function cargarAtenciones() {
