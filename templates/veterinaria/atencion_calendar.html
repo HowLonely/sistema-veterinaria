@@ -70,12 +70,14 @@
       },
       selectConstraint: "businessHours",
       select: function(start, end, jsEvent, view) {
-        // Redirecciona a la 
+        // Redirecciona a la grid del dia seleccionado
         if (start.view && start.view.type === 'dayGridMonth' || start.view.type === 'customMonth') {
           var selectedDate = start.startStr;
           calendar.changeView('timeGridDay', selectedDate);
         } else {
-          console.log("Rango seleccionado:", start, end);
+          console.log("Rango seleccionado: ", start);
+          console.log("Fecha para el form: ", start.startStr);
+          console.log("Hora inicial para el form: ", (new Date (start.startStr)).getHours(), (new Date (start.startStr)).getMinutes() );
         }
       },
       events: allAtenciones,
@@ -83,10 +85,10 @@
 
     calendar.render();
     
-    function openModalWithDate(date) {
+    function openModalWithDate(date, initialHr, endHr) {
       formatedDate = date.toISOString().split('T')[0];
       $('#form_agregar_atencion').modal('show');
-      $('#id_fecha_atencion').val(formatedDate);
+      $('#id_fecha_atencion').val(formatedDate);  
     }
 
     function cargarAtenciones() {
@@ -99,6 +101,7 @@
         return atencion.idVeterinario == selectedVeterinarioId;
       });
 
+      // Actualiza el calendar
       calendar.removeAllEvents();
       calendar.addEventSource(filteredAtenciones);
     }
