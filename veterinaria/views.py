@@ -190,4 +190,4 @@ def reservas(req):
             return redirect(req.path)
     else:
         form = forms.AtencionForm()
-    return render(req, 'veterinaria/atenciones.html', {'form': form, 'atenciones': models.Atencion.objects.all() })
+    return render(req, 'veterinaria/atencion_calendar.html', {'form': form, 'atenciones': models.Atencion.objects.all(), 'veterinarios': models.CustomUser.objects.filter(id_tipo_usuario = 3) })
