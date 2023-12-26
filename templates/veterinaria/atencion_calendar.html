@@ -1,0 +1,167 @@
+{% extends "veterinaria/base.html" %}
+{% load static %}
+
+{% block titulo %}Catálogo atenciones{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
+<script src="{% static 'vendor/fullcalendar-6.1.10/dist/index.global.js'%}"></script>
+
+<!-- Cargar aquí los valores del calendar -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      themeSystem: 'bootstrap5',
+      height: 750,
+      initialView: 'dayGridMonth',
+      locale: 'es',
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'customMonth,customWeek,customDay'
+      },
+      buttonText: {
+        today: 'Hoy' // Nombre personalizado para el botón "hoy"
+      },
+      views: {
+        customMonth: {
+          type: 'dayGridMonth',
+          buttonText: 'Mes' // Nombre personalizado para el mes
+        },
+        customWeek: {
+          type: 'timeGridWeek',
+          buttonText: 'Semana' // Nombre personalizado para la semana
+        },
+        customDay: {
+          type: 'timeGridDay',
+          buttonText: 'Día' // Nombre personalizado para el día
+        }
+      },
+      dateClick: function(info) {
+        // Abre el modal y establece la fecha en el formulario
+        openModalWithDate(info.date);
+      },
+      
+      businessHours: {
+        daysOfWeek: [1, 2, 3, 4, 5], // Lunes a Viernes
+        startTime: '08:00', // Hora de inicio
+        endTime: '17:00' // Hora de término
+      },
+      events: [
+        {% for atencion in atenciones %}
+        {
+          title: '{{ atencion.id_veterinario.nombres}} - {{atencion.id_mascota.nombre_mascota }}',
+          start: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_ingreso|time:"H:i:s" }}',
+          end: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_termino|time:"H:i:s" }}'
+        },
+        {% endfor %}
+      ]
+    });
+
+    calendar.render();
+
+    function openModalWithDate(date) {
+      // Formatea la fecha en el formato que necesitas (ajusta según tus necesidades)
+      formatedDate= date.toISOString().split('T')[0];
+      // Abre el modal y establece la fecha en el formulario
+      $('#form_agregar_atencion').modal('show');
+      $('#id_fecha_atencion').val(formatedDate);
+    }
+  });
+</script>
+{% endblock %}
+
+{% block reservas %}active" aria-current="page{% endblock %}
+
+{% block contenido %}
+  <div class="ms-auto col-xl-11 col-md-10 col-12 ps-5 mt-md-0 mt-5 pt-md-0 pt-3">
+    <div class="container m-0 p-0">
+      <h1 class="mt-3">Atenciones</h1>
+      {% if perms.veterinaria.add_atencion %}
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary mb-3 mt-3 justify-content-end align-self-end" data-bs-toggle="modal" data-bs-target="#form_agregar_atencion">
+        Agregar una atención
+      </button>
+      {% endif %}
+      <div id='calendar'></div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="form_agregar_atencion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="form_agregar_atencionLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="form_agregar_atencionLabel">Crear atención</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="POST">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="mb-3 col-6">
+                    {{ form.fecha_atencion.label_tag  }}
+                    {{ form.fecha_atencion }}
+                    {{ form.fecha_atencion.errors }}
+                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                  </div>
+                  <div class="mb-3 col-3">
+                    {{ form.hora_ingreso.label_tag  }}
+                    {{ form.hora_ingreso }}
+                    {{ form.hora_ingreso.errors }}
+                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                  </div>
+                  <div class="mb-3 col-3">
+                    {{ form.hora_termino.label_tag  }}
+                    {{ form.hora_termino }}
+                    {{ form.hora_termino.errors }}
+                  </div>
+                </div>
+                <div class="mb-3">
+                  {{ form.id_mascota.label_tag  }}
+                  {{ form.id_mascota }}
+                  {{ form.id_mascota.errors }}
+                  <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                </div>
+                <div class="mb-3">
+                  {{ form.agendada_por_asistente.label_tag  }}
+                  {{ form.agendada_por_asistente }}
+                  {{ form.agendada_por_asistente.errors }}
+                  <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                </div>
+                <div class="mb-3">
+                  {{ form.id_veterinario.label_tag  }}
+                  {{ form.id_veterinario }}
+                  {{ form.id_veterinario.errors }}
+                  <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                </div>
+                <div class="mb-3">
+                  {{ form.diagnostico.label_tag  }}
+                  {{ form.diagnostico }}
+                  {{ form.diagnostico.errors }}
+                  <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                </div>
+                <div class="mb-3">
+                  {{ form.tratamiento.label_tag  }}
+                  {{ form.tratamiento }}
+                  {{ form.tratamiento.errors }}
+                  <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                </div>
+                <div class="mb-3">
+                  {{ form.observaciones.label_tag  }}
+                  {{ form.observaciones }}
+                  {{ form.observaciones.errors }}
+                  <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Crear atención</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

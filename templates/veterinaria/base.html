@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    {% block link %}{% endblock %}
     <title>{% block titulo %}Clínica veterinaria{% endblock %}</title>
   </head>
   <body data-bs-theme="dark">
@@ -43,6 +44,14 @@
                     text-decoration-line-through fw-lighter
                     {% endif %}" href="{% url 'razas' %}">Razas</a>
                   </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link {% block reservas %}{% endblock %}
+                    text-decoration-line-through fw-lighter" 
+                    href="{% url 'reservas' %}">Reservas</a>
+                  </li>
+                
+                
                   <hr class="border border-primary border-2 opacity-75">
                   {% if user.is_authenticated %}
                   <li class="nav-item">

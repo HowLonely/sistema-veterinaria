@@ -26,5 +26,7 @@ urlpatterns = [
     path('modificar_raza/<int:raza_id>/', views.modificar_raza, name='modificar_raza'),
     path('raza/<int:raza_id>/', views.raza, name='raza'),
 
+    path('reservas/', views.reservas, name='reservas'),
+
     path('accounts/', include('django.contrib.auth.urls')),
 ]

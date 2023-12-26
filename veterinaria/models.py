@@ -5,7 +5,6 @@ from django.contrib.auth.models import AbstractUser
 
 class TipoUsuario(models.Model):
     rol = models.CharField(max_length=95)
-
     def __str__(self):
         return self.rol
 
@@ -13,6 +12,13 @@ class CustomUser(AbstractUser):
     rut = models.CharField(max_length=10)
     cod_profesional = models.CharField(max_length=45, null=True)
     id_tipo_usuario = models.ForeignKey(TipoUsuario, on_delete=models.CASCADE, null=True)
+    
+    def save(self, *args, **kwargs):
+        # Hasheamos la contraseña antes de guardar
+        if self.password:
+            self.set_password(self.password)
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

@@ -92,7 +92,7 @@ class AtencionForm(forms.ModelForm):
         label="Ficha Clínica"
     )
     id_veterinario = forms.ModelChoiceField(
-        queryset=CustomUser.objects.filter(),
+        queryset=CustomUser.objects.filter(id_tipo_usuario_id=3),
         empty_label="Selecciona veterinario",
         widget=forms.Select(attrs={'class':'form-select'}),
         label="Veterinario"
