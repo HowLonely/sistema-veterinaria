@@ -62,6 +62,23 @@ const ac = new Autocomplete(document.getElementById('myAutocomplete'), {data: da
     });
     $('#modificar_raza_form').attr("action", "/modificar_raza/" + raza_id + "/");
   });
+
+  $(function() {
+    $('#modificar_raza_form').on('submit', function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: $(this).attr('action'),
+        type: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response) {
+          if (!response.success) {
+            $('#modal-body_form_modificar').html(response.form);
+          } else { window.location.assign("{%url 'razas'%}") }
+        }
+      });
+    });
+  });
 </script>
 {% endblock %}
 

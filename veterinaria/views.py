@@ -177,7 +177,9 @@ def modificar_raza(req, raza_id):
         form = forms.RazaForm(req.POST, instance=raza)
         if form.is_valid():
             form.save()
-            return redirect('/razas/')
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'form': form.as_div()})
     else:
         form = forms.RazaForm(instance=raza)
     return render(req, 'veterinaria/especies.html', { 'form': form, 'razas': models.Raza.objects.all(), 'mascotas': models.FichaClinica.objects.all() })
@@ -190,4 +192,4 @@ def reservas(req):
             return redirect(req.path)
     else:
         form = forms.AtencionForm()
-    return render(req, 'veterinaria/atencion_calendar.html', {'form': form, 'atenciones': models.Atencion.objects.all(), 'veterinarios': models.CustomUser.objects.filter(id_tipo_usuario = 3) })
+    return render(req, 'veterinaria/atenciones.html', {'form': form, 'atenciones': models.Atencion.objects.all() })
