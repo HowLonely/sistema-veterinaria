@@ -187,9 +187,7 @@ def reservas(req):
         form = forms.AtencionForm(req.POST)
         if form.is_valid():
             form.save()
-            return JsonResponse({'success': True})
-        else:
-            return JsonResponse({'success': False, 'errors': form.errors})
+            return redirect(req.path)
     else:
         form = forms.AtencionForm()
-    return render(req, 'veterinaria/atencion_calendar.html', { 'form': form, 'atenciones': models.Atencion.objects.all() })
+    return render(req, 'veterinaria/atenciones.html', {'form': form, 'atenciones': models.Atencion.objects.all() })
