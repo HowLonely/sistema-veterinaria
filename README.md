@@ -52,7 +52,7 @@ Tiempo(Esfuerzo): 3+2+5+1+1 = 12 Horas
 - [ ] Como Administrador, necesito crear perfiles dentro del sistema para poder dar distintos tipos de accesos al sistema.
 
   - [x] Crear la interfaz en el que se visualice el formulario de administrador para agregar un nuevo perfil (Tiempo: 3 Horas)
-  - [ ] Crear la lógica para generar una contraseña temporal segura (Tiempo: 2 Horas)
+  - [x] Crear la lógica para generar una contraseña temporal segura (Tiempo: 2 Horas)
   - [x] Conectar con la base de datos para almacenar el nuevo perfil (Tiempo: 1 Hora)
   - [ ] Crear la lógica para enviar la contraseña temporal por correo (Tiempo: 5 Horas)
   - [x] Realizar las validaciones de los datos ingresados en el formulario (Tiempo: 3 Horas)
@@ -74,33 +74,33 @@ Tiempo(Esfuerzo): 3+2+5+1+1 = 12 Horas
 
 - [ ] Como Asistente, necesito agendar una hora de atención del cliente para poder reservar la hora de un veterinario.
 
-  - [ ] Crear una interfaz que muestre el formulario (Tiempo: 3.3 Horas)
-  - [ ] Validar cliente y veterinario (Tiempo: 2.7 Horas)
+  - [x] Crear una interfaz que muestre el formulario (Tiempo: 3.3 Horas)
+  - [x] Validar cliente y veterinario (Tiempo: 2.7 Horas)
   - [ ] Validación de disponibilidad de horario (Tiempo: 4 Horas)
-  - [ ] Ingreso de hora en la base de datos (Tiempo: 3.5 Horas)
+  - [x] Ingreso de hora en la base de datos (Tiempo: 3.5 Horas)
 
   **Total: 13.5 Horas**
 
-- [ ] Como Asistente, necesito visualizar todas las horas de los distintos veterinarios para poder agendar una hora libre y ver disponibilidad de los veterinarios.
+- [x] Como Asistente, necesito visualizar todas las horas de los distintos veterinarios para poder agendar una hora libre y ver disponibilidad de los veterinarios.
 
-  - [ ] Crear la interfaz que muestre el calendario con los bloques de hora, si esta está disponible, junto al veterinario y el botón para agendar hora con un cliente en específico (Tiempo: 9 Horas)
-  - [ ] Conectar con la base de datos y traer los datos de las horas de los veterinarios (Tiempo: 2.5 Horas)
+  - [x] Crear la interfaz que muestre el calendario con los bloques de hora, si esta está disponible, junto al veterinario y el botón para agendar hora con un cliente en específico (Tiempo: 9 Horas)
+  - [x] Conectar con la base de datos y traer los datos de las horas de los veterinarios (Tiempo: 2.5 Horas)
 
   **Total: 11.5 Horas**
 
-- [ ] Como Asistente, necesito eliminar una hora de atención del cliente para eliminar una hora que ha sido cancelada y liberar la hora.
+- [x] Como Asistente, necesito eliminar una hora de atención del cliente para eliminar una hora que ha sido cancelada y liberar la hora.
 
-  - [ ] Crear una interfaz que muestre las horas de atención de un cliente (Tiempo: 3 Horas)
-  - [ ] Conectar con la base de datos y traer las horas de atención de un cliente en específico (Tiempo: 2.5 Horas)
-  - [ ] Realizar el cambio para eliminar la hora de atención de la base de datos (Tiempo: 2 Horas)
+  - [x] Crear una interfaz que muestre las horas de atención de un cliente (Tiempo: 3 Horas)
+  - [x] Conectar con la base de datos y traer las horas de atención de un cliente en específico (Tiempo: 2.5 Horas)
+  - [x] Realizar el cambio para eliminar la hora de atención de la base de datos (Tiempo: 2 Horas)
 
   **Total: 7.5 Horas**
 
-- [ ] Como Asistente, necesito poder agendar horas sin la realización de una ficha clínica para atender mascotas rescatadas que no estén asociadas a un dueño.
+- [x] Como Asistente, necesito poder agendar horas sin la realización de una ficha clínica para atender mascotas rescatadas que no estén asociadas a un dueño.
 
-  - [ ] Crear una interfaz que muestre el formulario (Tiempo: 3 Horas)
-  - [ ] Validar cliente como NN y veterinario disponibilidad de horario (Tiempo: 3 Horas)
-  - [ ] Ingreso de hora en la base de datos (Tiempo: 1 Hora)
+  - [x] Crear una interfaz que muestre el formulario (Tiempo: 3 Horas)
+  - [x] Validar cliente como NN y veterinario disponibilidad de horario (Tiempo: 3 Horas)
+  - [x] Ingreso de hora en la base de datos (Tiempo: 1 Hora)
 
   **Total: 7 Horas**
 
