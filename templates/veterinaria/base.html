@@ -46,9 +46,9 @@
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link {% block reservas %}{% endblock %}
-                    text-decoration-line-through fw-lighter" 
-                    href="{% url 'reservas' %}">Reservas</a>
+                    <a class="nav-link {% block reservas %}{% endblock %} {% if not perms.veterinaria.view_atencion %}
+                    text-decoration-line-through fw-lighter
+                    {% endif %}" href="{% url 'reservas' %}">Reservar</a>
                   </li>
                 
                 

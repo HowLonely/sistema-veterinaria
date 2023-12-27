@@ -1,14 +1,14 @@
 {% extends "veterinaria/base.html" %}
 {% load static %}
 
-{% block titulo %}Catálogo atenciones{% endblock %}
+{% block titulo %}Detalles de la atencion{% endblock %}
 
 {% block atenciones %}active" aria-current="page{% endblock %}
 
 {% block contenido %}
 <div class="ms-auto col-xl-11 col-md-10 col-12 ps-5 mt-md-0 mt-5 pt-md-0 pt-3">
   <div class="container m-0 p-0">
-    <h1>Atención</h1>
+    <h1>Detalles de la atencion</h1>
     <form method="POST" action="{% url 'atencionEdit' atencion.id %}">
       {% csrf_token %}
       <div class="row">

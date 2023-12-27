@@ -79,23 +79,25 @@ class FichaForm(forms.ModelForm):
         fields = '__all__'
 
 class AtencionForm(forms.ModelForm):
-    hora_ingreso = forms.TimeField(widget=forms.TimeInput(attrs={'class':'form-control','type': 'time'}))
-    hora_termino = forms.TimeField(widget=forms.TimeInput(attrs={'class':'form-control','type': 'time'}))
-    diagnostico = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control','placeholder': 'Ingrese Diagnostico', 'rows': '2'}))
-    tratamiento = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control','placeholder': 'Ingrese Tratamiento', 'rows': '2'}))
-    observaciones = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control','placeholder': 'Ingrese Observaciones', 'rows': '2'}))
-    fecha_atencion = forms.DateField(widget=forms.DateInput(attrs={'class':'form-control','placeholder': 'Día/Mes/Año', 'type': 'date'}))
+    hora_ingreso = forms.TimeField(widget=forms.TimeInput(attrs={'class':'form-control','type': 'time'}), required=True)
+    hora_termino = forms.TimeField(widget=forms.TimeInput(attrs={'class':'form-control','type': 'time'}), required=True)
+    diagnostico = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control','placeholder': 'Ingrese Diagnostico', 'rows': '2'}), required=False)
+    tratamiento = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control','placeholder': 'Ingrese Tratamiento', 'rows': '2'}), required=False)
+    observaciones = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control','placeholder': 'Ingrese Observaciones', 'rows': '2'}), required=False)
+    fecha_atencion = forms.DateField(widget=forms.DateInput(attrs={'class':'form-control','placeholder': 'Día/Mes/Año', 'type': 'date'}), required=True)
     id_mascota = forms.ModelChoiceField(
         queryset=FichaClinica.objects.all(),
         empty_label="Selecciona ficha clínica",
         widget=forms.Select(attrs={'class':'form-select'}),
-        label="Ficha Clínica"
+        label="Ficha Clínica",
+        required=False
     )
     id_veterinario = forms.ModelChoiceField(
         queryset=CustomUser.objects.filter(id_tipo_usuario_id=3),
         empty_label="Selecciona veterinario",
         widget=forms.Select(attrs={'class':'form-select'}),
-        label="Veterinario"
+        label="Veterinario",
+        required=True
     )
 
     class Meta:

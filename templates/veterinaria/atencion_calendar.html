@@ -14,38 +14,37 @@
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var allAtenciones = [
-      {% for atencion in atenciones_pasadas %}
-      { 
-        title: '{{ atencion.id_veterinario.first_name }} - {{ atencion.id_mascota.nombre_mascota }}',
-        start: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_ingreso|time:"H:i:s" }}',
+    {% for atencion in atenciones_pasadas %}
+    {
+      title: '{% if atencion.id_mascota.nombre_mascota %}{{ atencion.id_veterinario.first_name }} - {{ atencion.id_mascota.nombre_mascota }}{% else %}Mascota sin ficha{% endif %}',
+      start: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_ingreso|time:"H:i:s" }}',
         end: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_termino|time:"H:i:s" }}',
-        idVeterinario: {{ atencion.id_veterinario.id }},
+        idVeterinario: {% if atencion.id_veterinario.id %}{{ atencion.id_veterinario.id }}{% else %}0{% endif %},
         backgroundColor: 'red',
         url: '{% url "verAtencion" atencion_id=atencion.id %}',
-      },
-      {% endfor %}
-      {% for atencion in atenciones_presentes %}
-        {
-          title: '{{ atencion.id_veterinario.first_name }} - {{ atencion.id_mascota.nombre_mascota }}',
-          start: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_ingreso|time:"H:i:s" }}',
-          end: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_termino|time:"H:i:s" }}',
-          idVeterinario: {{ atencion.id_veterinario.id }},
-          backgroundColor: 'green',
-          url: '{% url "verAtencion" atencion_id=atencion.id %}',
-        },
-      {% endfor %}
-      {% for atencion in atenciones_futuras %}
-        {
-          title: '{{ atencion.id_veterinario.first_name }} - {{ atencion.id_mascota.nombre_mascota }}',
-          start: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_ingreso|time:"H:i:s" }}',
-          end: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_termino|time:"H:i:s" }}',
-          idVeterinario: {{ atencion.id_veterinario.id }},
-          backgroundColor: 'blue',
-          url: '{% url "verAtencion" atencion_id=atencion.id %}',
-        },
-      {% endfor %}
-  
+    },
+    {% endfor %}
+    {% for atencion in atenciones_presentes %}
+    {
+      title: '{% if atencion.id_mascota.nombre_mascota %}{{ atencion.id_veterinario.first_name }} - {{ atencion.id_mascota.nombre_mascota }}{% else %}Mascota sin ficha{% endif %}',
+      start: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_ingreso|time:"H:i:s" }}',
+        end: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_termino|time:"H:i:s" }}',
+        idVeterinario: {% if atencion.id_veterinario.id %}{{ atencion.id_veterinario.id }}{% else %}0{% endif %},
+        backgroundColor: 'green',
+        url: '{% url "verAtencion" atencion_id=atencion.id %}',
+    },
+    {% endfor %}
+    {% for atencion in atenciones_futuras %}
+    {
+      title: '{% if atencion.id_mascota.nombre_mascota %}{{ atencion.id_veterinario.first_name }} - {{ atencion.id_mascota.nombre_mascota }}{% else %}Mascota sin ficha{% endif %}',
+      start: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_ingreso|time:"H:i:s" }}',
+        end: '{{ atencion.fecha_atencion|date:"Y-m-d" }}T{{ atencion.hora_termino|time:"H:i:s" }}',
+        idVeterinario: {% if atencion.id_veterinario.id %}{{ atencion.id_veterinario.id }}{% else %}0{% endif %},
+        url: '{% url "verAtencion" atencion_id=atencion.id %}',
+    },
+    {% endfor %}
     ];
+
 
     var calendar = new FullCalendar.Calendar(calendarEl,  {
       themeSystem: 'bootstrap5',
@@ -202,17 +201,12 @@
                   <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
                 <div class="mb-3">
-                  {{ form.agendada_por_asistente.label_tag  }}
-                  {{ form.agendada_por_asistente }}
-                  {{ form.agendada_por_asistente.errors }}
-                  <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
-                </div>
-                <div class="mb-3">
                   {{ form.id_veterinario.label_tag  }}
                   {{ form.id_veterinario }}
                   {{ form.id_veterinario.errors }}
                   <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
+                <hr />
                 <div class="mb-3">
                   {{ form.diagnostico.label_tag  }}
                   {{ form.diagnostico }}
