@@ -185,6 +185,7 @@ def modificar_raza(req, raza_id):
         form = forms.RazaForm(instance=raza)
     return render(req, 'veterinaria/especies.html', { 'form': form, 'razas': models.Raza.objects.all(), 'mascotas': models.FichaClinica.objects.all() })
 
+@permission_required("veterinaria.view_atencion", raise_exception=True)
 def reservas(req):
     now = timezone.now()
     if req.method == 'POST':
