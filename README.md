@@ -72,11 +72,11 @@ Tiempo(Esfuerzo): 3+2+5+1+1 = 12 Horas
 
 ## Sprint 3 (Módulo de Agendamiento de Horas):
 
-- [ ] Como Asistente, necesito agendar una hora de atención del cliente para poder reservar la hora de un veterinario.
+- [x] Como Asistente, necesito agendar una hora de atención del cliente para poder reservar la hora de un veterinario.
 
   - [x] Crear una interfaz que muestre el formulario (Tiempo: 3.3 Horas)
   - [x] Validar cliente y veterinario (Tiempo: 2.7 Horas)
-  - [ ] Validación de disponibilidad de horario (Tiempo: 4 Horas)
+  - [x] Validación de disponibilidad de horario (Tiempo: 4 Horas)
   - [x] Ingreso de hora en la base de datos (Tiempo: 3.5 Horas)
 
   **Total: 13.5 Horas**
